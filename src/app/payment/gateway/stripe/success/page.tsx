@@ -1,19 +1,28 @@
-import LoginFormComponent from "@/app/login/(components)/login-form.component";
+"use client";
+import { redirectAfterDelay } from "@/app/payment/gateway/stripe/success/actions";
 import { Hexagon } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 
-export default function LoginPage() {
+export default function PaymentGatewayStripeSuccessPage() {
+  useEffect(() => {
+    async function redirect() {
+      await redirectAfterDelay({ delay: 5000, url: "/" });
+    }
+    redirect();
+  }, []);
+
   return (
     <main className="flex min-h-screen">
-      <div className="p-4 w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
-        <h1 className="text-4xl">Welcome back</h1>
+      <div className="p-4 w-1/2 bg-background flex flex-col gap-4 justify-center text-primary items-center">
+        <h1 className="text-4xl">Congratulations!</h1>
         <p className="text-muted-foreground">
-          Enter your email and password to sign in to your account
+          Let&apos;s get you started. You will be redirected in a moment. If
+          you&apos;re not redirected,{" "}
+          <Link className="text-muted-foreground underline" href={"/"}>
+            click here
+          </Link>
         </p>
-        <LoginFormComponent />
-        <Link className="text-muted-foreground underline" href={"/register"}>
-          Don&apos;t have an account? Sign up
-        </Link>
         <p className="text-sm text-muted-foreground">
           By clicking continue, you agree to our{" "}
           <Link className="underline" href={"/privacy-policy"}>

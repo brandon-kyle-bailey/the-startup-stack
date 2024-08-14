@@ -1,18 +1,18 @@
-import LoginFormComponent from "@/app/login/(components)/login-form.component";
+import RegisterFormComponent from "@/app/register/(components)/register-form.component";
 import { Hexagon } from "lucide-react";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="flex min-h-screen">
       <div className="p-4 w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
-        <h1 className="text-4xl">Welcome back</h1>
+        <h1 className="text-4xl">Create an account</h1>
         <p className="text-muted-foreground">
-          Enter your email and password to sign in to your account
+          Enter your email below to create your account
         </p>
-        <LoginFormComponent />
-        <Link className="text-muted-foreground underline" href={"/register"}>
-          Don&apos;t have an account? Sign up
+        <RegisterFormComponent />
+        <Link className="text-muted-foreground underline" href={"/login"}>
+          Already have an account? Sign in
         </Link>
         <p className="text-sm text-muted-foreground">
           By clicking continue, you agree to our{" "}
