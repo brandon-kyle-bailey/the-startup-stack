@@ -1,5 +1,6 @@
 "use client";
 
+import { handleStripeCheckout } from "@/app/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +21,8 @@ const pricingPlans = [
   {
     id: 0,
     popular: false,
-    externalProductId: "",
+    externalProductId: "price_1Pork5BPkmIjU4TJidywH5kc",
+    externalProductIdAnnual: "price_1Pork5BPkmIjU4TJidywH5kc",
     name: "Free",
     description: "For the Hobbyist",
     monthPrice: "0",
@@ -57,7 +59,8 @@ const pricingPlans = [
   {
     id: 1,
     popular: true,
-    externalProductId: "",
+    externalProductId: "price_1PorP2BPkmIjU4TJLNlnbwGw",
+    externalProductIdAnnual: "price_1PorQNBPkmIjU4TJ8pkwQj3M",
     name: "Pro",
     description: "For the Hobbyist",
     monthPrice: "19.99",
@@ -95,6 +98,8 @@ const pricingPlans = [
     id: 2,
     popular: false,
     name: "Enterprise",
+    externalProductId: "price_1PorPdBPkmIjU4TJ0st7UIYz",
+    externalProductIdAnnual: "price_1PorR1BPkmIjU4TJH9p9rysU",
     description: "For the Hobbyist",
     monthPrice: "99.99",
     annualPrice: "999.99",
@@ -172,7 +177,18 @@ export default function PricingSection() {
                     <span>/ {isAnnual ? "Annually" : "Monthly"}</span>
                   </span>
                   <span>{plan.description}</span>
-                  <Button variant="default">Get Started</Button>
+                  <Button
+                    variant="default"
+                    onClick={() =>
+                      handleStripeCheckout(
+                        isAnnual
+                          ? plan.externalProductId
+                          : plan.externalProductIdAnnual,
+                      )
+                    }
+                  >
+                    Get Started
+                  </Button>
                 </CardDescription>
               </CardHeader>
               <CardContent className="w-full flex justify-start">

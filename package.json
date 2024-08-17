@@ -14,7 +14,7 @@
     "migrate:generate": "npx prisma migrate dev --name $1",
     "migrate:run": "npx prisma db push",
     "reverse-proxy": "npx ngrok http 3000",
-    "stripe:proxy": "stripe listen --forward-to $1",
+    "stripe:proxy": "stripe listen --forward-to localhost:3000/api/payment/gateway/stripe/callback",
     "supabase:init": "npx supabase init",
     "supabase:start": "npx supabase start",
     "supabase:stop": "npx supabase stop"
@@ -48,6 +48,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@stripe/stripe-js": "^4.3.0",
     "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.45.1",
     "class-variance-authority": "^0.7.0",
