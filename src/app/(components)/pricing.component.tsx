@@ -181,9 +181,8 @@ export default function PricingSection() {
                     variant="default"
                     onClick={() =>
                       handleStripeCheckout(
-                        isAnnual
-                          ? plan.externalProductId
-                          : plan.externalProductIdAnnual,
+                        isAnnual ? plan.annualPrice : plan.monthPrice,
+                        isAnnual,
                       )
                     }
                   >

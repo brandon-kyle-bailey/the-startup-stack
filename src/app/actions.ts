@@ -2,14 +2,17 @@ import { toast } from "@/components/ui/use-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-export async function handleStripeCheckout(productId: string) {
+export async function handleStripeCheckout(price: string, isAnnual: boolean) {
   try {
     const { data } = await axios.post(`/api/payment/gateway/stripe/checkout`, {
-      priceId: productId,
+      price,
+      isAnnual,
     });
 
     if (data.sessionId) {
-      const stripe = await loadStripe(process.env.STRIPE_PUBLIC_KEY!);
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!,
+      );
 
       const response = await stripe!.redirectToCheckout({
         sessionId: data.sessionId,
@@ -21,7 +24,7 @@ export async function handleStripeCheckout(productId: string) {
       return;
     }
   } catch (error) {
-    toast({ title: "Error during checkout" });
+    toast({ title: "Error during checkout", description: `${error}` });
     return;
   }
 }
