@@ -1,5 +1,6 @@
 "use client";
 
+import { otp } from "@/app/(auth)/otp/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,28 +15,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { signup } from "@/app/register/actions";
-import { Github } from "lucide-react";
-
 const FormSchema = z.object({
   email: z.string().email({
     message: "Email address is required",
   }),
-  password: z.string().min(1, {
-    message: "Password is required.",
-  }),
 });
 
-export default function RegisterFormComponent() {
+export default function OtpFormComponent() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await signup({ email: data.email, password: data.password });
+    await otp({ email: data.email });
   }
   return (
     <Form {...form}>
@@ -56,24 +50,7 @@ export default function RegisterFormComponent() {
             </FormItem>
           )}
         />
-        <FormLabel>Password</FormLabel>
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Sign up with Email</Button>
-        <p className="text-center text-muted-foreground">or</p>
-        <Button variant={"outline"}>
-          Sign up with <Github className="m-2" />
-        </Button>
+        <Button type="submit">Send me a One Time Passcode</Button>
       </form>
     </Form>
   );

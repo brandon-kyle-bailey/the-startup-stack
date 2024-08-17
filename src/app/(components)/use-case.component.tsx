@@ -19,7 +19,7 @@ export default function UsecaseSection() {
     >
       <h1 className="text-2xl text-primary">Use Case</h1>
       <p>Let&apos;s explain how this works</p>
-      <div className="w-full lg:w-3/4 flex flex-col gap-8 lg:gap-32">
+      <div className="w-full lg:w-3/4 flex flex-col gap-8 lg:gap-64">
         <div id="use-case-1" className="w-full flex flex-col lg:flex-row gap-8">
           <Card className="w-full lg:w-1/2 flex flex-col justify-around border-none shadow-none">
             <CardHeader>

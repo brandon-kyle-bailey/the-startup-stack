@@ -19,35 +19,35 @@ export default function NavigationSection() {
         <NavigationMenu className="text-muted-foreground">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/landing/#use-case" legacyBehavior passHref>
+              <Link href="/#use-case" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Use Case
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/landing/#features" legacyBehavior passHref>
+              <Link href="/#features" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Features
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/landing/#testimonials" legacyBehavior passHref>
+              <Link href="/#testimonials" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Testimonials
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/landing/#faq" legacyBehavior passHref>
+              <Link href="/#faq" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   FAQ
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/landing/#pricing" legacyBehavior passHref>
+              <Link href="/#pricing" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Pricing
                 </NavigationMenuLink>

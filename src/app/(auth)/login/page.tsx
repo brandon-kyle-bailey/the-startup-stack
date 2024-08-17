@@ -1,4 +1,4 @@
-import LoginFormComponent from "@/app/login/(components)/login-form.component";
+import LoginFormComponent from "@/app/(auth)/login/(components)/login-form.component";
 import { Hexagon } from "lucide-react";
 import Link from "next/link";
 

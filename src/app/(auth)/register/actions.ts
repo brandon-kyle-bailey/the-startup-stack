@@ -1,9 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import { otp } from "@/app/(auth)/otp/actions";
 
 export async function signup(data: { email: string; password: string }) {
   const supabase = createClient();
@@ -15,6 +15,5 @@ export async function signup(data: { email: string; password: string }) {
     redirect("/error");
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  return await otp({ email: data.email });
 }

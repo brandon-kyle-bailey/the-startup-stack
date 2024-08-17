@@ -5,6 +5,11 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
+export async function otpRedirect() {
+  revalidatePath("/otp", "layout");
+  redirect("/otp");
+}
+
 export async function login(data: { email: string; password: string }) {
   const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword(data);
@@ -14,6 +19,6 @@ export async function login(data: { email: string; password: string }) {
     redirect("/error");
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  revalidatePath("/dashboard", "layout");
+  redirect("/dashboard");
 }
