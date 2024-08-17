@@ -13,60 +13,61 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 import * as React from "react";
 
 const testimonials = [
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 1,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 2,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 3,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 4,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 5,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 6,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 7,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
     company: "Smith Co.",
   },
   {
-    image: "",
+    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
     id: 8,
     quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     name: "John Smith",
@@ -80,7 +81,7 @@ export default function TestimonialSection() {
   return (
     <section id="testimonials" className="flex flex-col items-center gap-6">
       <h1 className="text-2xl text-center">Hear from our customers</h1>
-      <div className="w-3/4 flex gap-8">
+      <div className="w-full lg:w-3/4 flex gap-8">
         <Carousel
           // @ts-ignore: mismatch type error
           plugins={[plugin.current]}
@@ -91,13 +92,17 @@ export default function TestimonialSection() {
           <CarouselContent>
             {testimonials.map((testimonial) => {
               return (
-                <CarouselItem key={testimonial.id} className="basis-1/3">
+                <CarouselItem key={testimonial.id} className="lg:basis-1/3">
                   <Card className="flex flex-col gap-4 shadow">
                     <CardHeader className="flex flex-col gap-4">
                       <CardTitle className="w-full flex justify-center">
-                        <div className="w-28 h-28 bg-secondary rounded-full">
-                          {testimonial.image}
-                        </div>
+                        <Image
+                          alt={testimonial.quote}
+                          width={500}
+                          height={500}
+                          src={testimonial.image}
+                          className="w-28 h-28 bg-accent rounded-full border"
+                        />
                       </CardTitle>
                       <CardDescription>
                         <span className="text-lg">

@@ -23,6 +23,24 @@ export default function FaqSection() {
             for you to build on
           </AccordionContent>
         </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>
+            Do I get access to this landing page in the starter kit?
+          </AccordionTrigger>
+          <AccordionContent>
+            Yes, this page isn&apos;t even a real landingpage more so a template
+            for you to build on
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger>
+            Do I get access to this landing page in the starter kit?
+          </AccordionTrigger>
+          <AccordionContent>
+            Yes, this page isn&apos;t even a real landingpage more so a template
+            for you to build on
+          </AccordionContent>
+        </AccordionItem>
       </Accordion>
     </section>
   );
