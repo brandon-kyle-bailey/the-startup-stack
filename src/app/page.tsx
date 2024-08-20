@@ -9,7 +9,7 @@ import UsecaseSection from "@/app/(components)/use-case.component";
 
 export default function Dashboard() {
   return (
-    <main className="p-8 px-16 min-h-screen flex flex-col gap-32">
+    <main className="p-8 lg:px-16 min-h-screen flex flex-col lg:gap-32">
       <NavigationSection />
       <HeroSection />
       <TestimonialSection />

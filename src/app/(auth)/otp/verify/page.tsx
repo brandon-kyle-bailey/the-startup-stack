@@ -83,7 +83,7 @@ export default function OtpVerifyPage() {
         </Link>
         <p className="text-sm text-muted-foreground">
           By clicking continue, you agree to our{" "}
-          <Link className="underline" href={"/privacy-policy"}>
+          <Link className="underline" href={"/terms-of-service"}>
             Terms of Service
           </Link>{" "}
           and{" "}

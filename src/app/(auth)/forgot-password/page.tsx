@@ -1,18 +1,14 @@
-import RegisterFormComponent from "@/app/(auth)/register/(components)/register-form.component";
 import { Hexagon } from "lucide-react";
 import Link from "next/link";
 
-export default function RegisterPage() {
+export default function ForgotPasswordPage() {
   return (
     <main className="flex min-h-screen">
       <div className="p-4 w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
-        <h1 className="text-4xl">Create an account</h1>
-        <p className="text-muted-foreground">
-          Enter your email below to create your account
-        </p>
-        <RegisterFormComponent />
-        <Link className="text-muted-foreground underline" href={"/login"}>
-          Already have an account? Sign in
+        <h1 className="text-4xl">Reset Your Password</h1>
+        <p className="text-muted-foreground">Enter your email address</p>
+        <Link className="text-muted-foreground underline" href={"/register"}>
+          Don&apos;t have an account? Sign up
         </Link>
         <p className="text-sm text-muted-foreground">
           By clicking continue, you agree to our{" "}

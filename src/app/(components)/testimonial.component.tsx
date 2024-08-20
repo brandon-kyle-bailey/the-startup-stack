@@ -38,42 +38,8 @@ const testimonials = [
     name: "John Smith",
     company: "Smith Co.",
   },
-  {
-    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
-    id: 4,
-    quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    name: "John Smith",
-    company: "Smith Co.",
-  },
-  {
-    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
-    id: 5,
-    quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    name: "John Smith",
-    company: "Smith Co.",
-  },
-  {
-    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
-    id: 6,
-    quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    name: "John Smith",
-    company: "Smith Co.",
-  },
-  {
-    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
-    id: 7,
-    quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    name: "John Smith",
-    company: "Smith Co.",
-  },
-  {
-    image: "https://avatars.githubusercontent.com/u/39861127?v=4",
-    id: 8,
-    quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    name: "John Smith",
-    company: "Smith Co.",
-  },
 ];
+
 export default function TestimonialSection() {
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true }),
@@ -93,24 +59,22 @@ export default function TestimonialSection() {
             {testimonials.map((testimonial) => {
               return (
                 <CarouselItem key={testimonial.id} className="lg:basis-1/3">
-                  <Card className="flex flex-col gap-4 shadow">
+                  <Card className="flex flex-col gap-4 border-none shadow-none">
                     <CardHeader className="flex flex-col gap-4">
-                      <CardTitle className="w-full flex justify-center">
-                        <Image
-                          alt={testimonial.quote}
-                          width={500}
-                          height={500}
-                          src={testimonial.image}
-                          className="w-28 h-28 bg-accent rounded-full border"
-                        />
-                      </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="w-full flex justify-center">
                         <span className="text-lg">
                           &quot;{testimonial.quote}&quot;
                         </span>
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col gap-2">
+                    <CardContent className="flex gap-2 items-center w-full justify-center">
+                      <Image
+                        alt={testimonial.quote}
+                        width={500}
+                        height={500}
+                        src={testimonial.image}
+                        className="w-28 h-28 bg-accent rounded-full border"
+                      />
                       <span className="text-muted-foreground">
                         {testimonial.name}
                       </span>

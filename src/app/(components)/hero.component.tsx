@@ -12,7 +12,7 @@ export default function HeroSection() {
         <p className="text-2xl text-muted-foreground">
           The all-in-one solution for launching your startup!
         </p>
-        <div className="flex max-sm:flex-col gap-4">
+        <div className="flex max-sm:flex-col max-sm:w-full gap-4">
           <Link href={"/register"}>
             <Button variant={"default"}>Get started for free</Button>
           </Link>

@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({
       status: 200,
-      message: "customer.subscription.created received received successfully",
+      message: `${event.type} received received successfully`,
     });
   } catch (error) {
     console.error("Stripe webhook handler experienced an error", error);

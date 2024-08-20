@@ -6,16 +6,88 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { NavigationMenuItem } from "@radix-ui/react-navigation-menu";
 import { Hexagon } from "lucide-react";
 import Link from "next/link";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function NavigationSection() {
   return (
     <section id="navigation" className="flex justify-between">
+      <div className="hidden max-sm:flex">
+        <Sheet>
+          <SheetTrigger asChild>
+            <GiHamburgerMenu />
+          </SheetTrigger>
+          <SheetContent side="left" className="flex flex-col gap-2">
+            <SheetHeader>
+              <SheetTitle className="flex flex-row gap-2 justify-center items-center font-semibold">
+                <Link href="/">
+                  <Hexagon />
+                  <p>The Startup Stack</p>
+                </Link>
+              </SheetTitle>
+            </SheetHeader>
+            <SheetClose asChild>
+              <Link href="/#use-case">
+                <Button variant="outline" className="w-full">
+                  Use Case
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/#features">
+                <Button variant="outline" className="w-full">
+                  Features
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/#testimonials">
+                <Button variant="outline" className="w-full">
+                  Testimonials
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/#faq">
+                <Button variant="outline" className="w-full">
+                  FAQ
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/blog">
+                <Button variant="outline" className="w-full">
+                  Blog
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/docs">
+                <Button variant="outline" className="w-full">
+                  Documentation
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetFooter></SheetFooter>
+          </SheetContent>
+        </Sheet>
+      </div>
       <div className="max-sm:hidden flex flex-row gap-2 justify-center items-center font-semibold">
-        <Hexagon />
-        <h1>The Startup Stack</h1>
+        <Link href="/" className="flex gap-2">
+          <Hexagon />
+          <p>The Startup Stack</p>
+        </Link>
         <NavigationMenu className="text-muted-foreground">
           <NavigationMenuList>
             <NavigationMenuItem>
