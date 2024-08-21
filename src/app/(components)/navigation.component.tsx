@@ -1,4 +1,5 @@
 import { ModeToggle } from "@/components/mode-toggle";
+import Search from "@/components/search";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -20,7 +21,11 @@ import { Hexagon } from "lucide-react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-export default function NavigationSection() {
+export default function NavigationSection({
+  links,
+}: {
+  links: { title: string; href: string }[];
+}) {
   return (
     <section id="navigation" className="flex justify-between">
       <div className="hidden max-sm:flex">
@@ -157,6 +162,7 @@ export default function NavigationSection() {
         </NavigationMenu>
       </div>
       <div className="max-sm:hidden flex gap-2">
+        <Search links={links} />
         <ModeToggle />
         <Link href={"/login"}>
           <Button variant={"ghost"}>Sign in</Button>

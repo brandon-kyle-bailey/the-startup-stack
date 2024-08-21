@@ -10,6 +10,7 @@ import { visit } from "unist-util-visit";
 
 // custom components imports
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Pre from "@/components/pre";
 
 type MdxFrontmatter = {
   title: string;
@@ -22,6 +23,7 @@ const components = {
   TabsContent,
   TabsList,
   TabsTrigger,
+  pre: Pre,
 };
 
 export async function getMarkdownForSlug(slug: string) {

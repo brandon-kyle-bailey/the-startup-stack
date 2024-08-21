@@ -1,17 +1,17 @@
 "use client";
 
-import { CommandIcon, FileTextIcon, SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTrigger,
-  DialogClose,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect, useMemo, useState } from "react";
+import { CommandIcon, FileTextIcon } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Search({
   links,

@@ -6,11 +6,12 @@ import NavigationSection from "@/app/(components)/navigation.component";
 import PricingSection from "@/app/(components)/pricing.component";
 import TestimonialSection from "@/app/(components)/testimonial.component";
 import UsecaseSection from "@/app/(components)/use-case.component";
+import { LANDING_PAGE_LINKS } from "@/lib/constants/routes";
 
 export default function Dashboard() {
   return (
     <main className="p-8 lg:px-16 min-h-screen flex flex-col lg:gap-32">
-      <NavigationSection />
+      <NavigationSection links={LANDING_PAGE_LINKS} />
       <HeroSection />
       <TestimonialSection />
       <UsecaseSection />

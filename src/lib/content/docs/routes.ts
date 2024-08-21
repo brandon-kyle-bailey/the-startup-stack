@@ -6,7 +6,7 @@ export const DOCS_ROUTES = [
   },
 ];
 
-export const docs_page_routes = DOCS_ROUTES.map(({ href, items }) => {
+export const DOCS_PAGE_ROUTES = DOCS_ROUTES.map(({ href, items }) => {
   return items.map((link) => {
     return {
       title: link.title,
