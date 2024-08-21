@@ -20,8 +20,8 @@ export default async function page({ params: { slug = [] } }: PageProps) {
   return (
     <main className="p-8 lg:px-16 min-h-screen flex flex-col">
       <NavigationComponent links={DOCS_PAGE_ROUTES} />
-      <div className="w-full flex gap-64 justify-center mt-10 mb-10">
-        <div className="hidden md:block">
+      <div className="w-full flex justify-between mt-10 mb-10">
+        <div className="hidden md:block pr-8 h-screen overflow-y-auto">
           <ul className="text-muted-foreground flex flex-col gap-2">
             {DOCS_ROUTES.map((ele, idx) => {
               return (
