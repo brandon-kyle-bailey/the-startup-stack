@@ -11,8 +11,7 @@ export async function signup(data: { email: string; password: string }) {
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
-    console.log(error);
-    redirect("/error");
+    return error.message;
   }
 
   return await otp({ email: data.email });

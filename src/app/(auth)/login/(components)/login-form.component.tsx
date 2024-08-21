@@ -16,6 +16,7 @@ import { z } from "zod";
 
 import { login, otpRedirect } from "@/app/(auth)/login/actions";
 import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
   email: z.string().email({
@@ -27,6 +28,7 @@ const FormSchema = z.object({
 });
 
 export default function LoginFormComponent() {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -35,7 +37,15 @@ export default function LoginFormComponent() {
     },
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await login({ email: data.email, password: data.password });
+    const error = await login({
+      email: data.email,
+      password: data.password,
+    });
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: `There was a problem with your request. ${error}`,
+    });
   }
 
   return (
@@ -43,7 +53,7 @@ export default function LoginFormComponent() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-1/2 flex flex-col gap-4"
+          className="w-full lg:w-1/2 flex flex-col gap-4"
         >
           <FormLabel>Email</FormLabel>
           <FormField
@@ -84,7 +94,7 @@ export default function LoginFormComponent() {
         </form>
       </Form>
       <p className="text-center text-muted-foreground">or</p>
-      <div className="w-1/2 flex flex-col gap-4">
+      <div className="w-full lg:w-1/2 flex flex-col gap-4">
         <Button variant={"outline"} onClick={() => otpRedirect()}>
           Sign in with a OTP
         </Button>

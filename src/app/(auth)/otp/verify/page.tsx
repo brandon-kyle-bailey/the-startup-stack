@@ -40,8 +40,8 @@ export default function OtpVerifyPage() {
     await otpVerify({ ...data, email: searchParams.get("email")! });
   }
   return (
-    <main className="flex min-h-screen">
-      <div className="p-4 w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
+    <main className="flex flex-col lg:flex-row h-screen">
+      <div className="h-full p-4 w-full lg:w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
         <h1 className="text-4xl">Welcome back</h1>
         <p className="text-muted-foreground">
           Enter your One Time Passcode to sign in to your account
@@ -92,7 +92,7 @@ export default function OtpVerifyPage() {
           </Link>
         </p>
       </div>
-      <div className="p-8 w-1/2 bg-primary flex flex-col justify-between text-background text-2xl">
+      <div className="h-full p-8 w-full lg:w-1/2 bg-primary flex flex-col justify-between text-background text-2xl">
         <div className="flex items-center gap-2">
           <Hexagon />
           <p>The Startup Stack</p>

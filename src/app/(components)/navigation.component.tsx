@@ -79,6 +79,20 @@ export default function NavigationSection() {
                 </Button>
               </Link>
             </SheetClose>
+            <SheetClose asChild>
+              <Link href="/login">
+                <Button variant="ghost" className="w-full">
+                  Sign in
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link href="/register">
+                <Button variant="default" className="w-full">
+                  Register
+                </Button>
+              </Link>
+            </SheetClose>
             <SheetFooter></SheetFooter>
           </SheetContent>
         </Sheet>

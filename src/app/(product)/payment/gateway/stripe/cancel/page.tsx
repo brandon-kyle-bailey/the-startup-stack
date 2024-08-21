@@ -1,6 +1,15 @@
+"use client";
+import { redirectAfterDelay } from "@/app/(product)/payment/gateway/stripe/success/actions";
 import { Hexagon } from "lucide-react";
+import { useEffect } from "react";
 
 export default function PaymentGatewayStripeCancelPage() {
+  useEffect(() => {
+    async function redirect() {
+      await redirectAfterDelay({ delay: 5000, url: "/" });
+    }
+    redirect();
+  }, []);
   return (
     <main className="flex min-h-screen">
       <div className="p-4 w-1/2 bg-background flex flex-col gap-4 justify-center text-primary items-center">
