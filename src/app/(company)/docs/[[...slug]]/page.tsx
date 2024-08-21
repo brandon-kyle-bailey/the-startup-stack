@@ -5,9 +5,9 @@ import AsideComponent from "@/components/aside";
 import BreadcrumbComponent from "@/components/breadcrumb";
 import MarkdownComponent from "@/components/markdown";
 import PaginationComponent from "@/components/pagination";
+import TableOfContentsComponent from "@/components/table-of-contents";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DOCS_PAGE_ROUTES, DOCS_ROUTES } from "@/lib/content/docs/routes";
-import Link from "next/link";
 
 type PageProps = {
   params: { slug: string[] };
@@ -22,9 +22,9 @@ export default async function page({ params: { slug = [] } }: PageProps) {
   return (
     <main className="p-8 lg:px-16 min-h-screen flex flex-col">
       <NavigationComponent links={DOCS_PAGE_ROUTES} />
-      <div className="w-full flex justify-center gap-64 mt-10 mb-10">
+      <div className="w-full flex justify-center lg:gap-64 mt-10 mb-10">
         <AsideComponent prefix="/docs" routes={DOCS_ROUTES} />
-        <div className="h-screen overflow-y-auto">
+        <div className="h-screen overflow-y-auto flex-1">
           <ScrollArea>
             <BreadcrumbComponent paths={slug} />
             <MarkdownComponent>
@@ -40,8 +40,8 @@ export default async function page({ params: { slug = [] } }: PageProps) {
             </MarkdownComponent>
           </ScrollArea>
         </div>
-        <div className="hidden lg:block h-screen overflow-y-auto">
-          <ScrollArea>hello</ScrollArea>
+        <div className="hidden h-screen overflow-y-auto text-start lg:flex">
+          <TableOfContentsComponent path={slug.join("/")} />
         </div>
       </div>
       <FooterSection />

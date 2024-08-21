@@ -13,9 +13,9 @@ export default function AsideComponent({
   }[];
 }) {
   return (
-    <aside className="hidden md:block pr-8 h-screen overflow-y-auto sticky">
+    <aside className="hidden md:flex pr-8 h-screen overflow-y-auto">
       <ScrollArea>
-        <ul className="text-muted-foreground flex flex-col gap-8">
+        <ul className="w-full text-muted-foreground flex flex-col gap-8">
           {routes.map((ele, idx) => {
             return (
               <li key={idx} className="flex flex-col gap-4">
