@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 export default function Search({
-  page_routes,
+  links,
 }: {
-  page_routes: { title: string; href: string }[];
+  links: { title: string; href: string }[];
 }) {
   const [searchedInput, setSearchedInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -34,75 +35,67 @@ export default function Search({
     };
   }, []);
 
-  const filteredResults = useMemo(
+  const results = useMemo(
     () =>
-      page_routes.filter((item) =>
+      links.filter((item) =>
         item.title.toLowerCase().includes(searchedInput.toLowerCase()),
       ),
-    [searchedInput, page_routes],
+    [searchedInput, links],
   );
 
   return (
-    <div>
-      <Dialog
-        open={isOpen}
-        onOpenChange={(open) => {
-          if (!open) setSearchedInput("");
-          setIsOpen(open);
-        }}
-      >
-        <DialogTrigger asChild>
-          <div className="relative flex-1 max-w-md cursor-pointer">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 dark:text-neutral-400" />
-            <Input
-              className="w-full rounded-md bg-muted border h-9 pl-10 pr-4 text-sm shadow-sm "
-              placeholder="Search"
-              type="search"
-            />
-            <div className="sm:flex hidden absolute top-1/2 -translate-y-1/2 right-2 text-xs font-medium font-mono items-center gap-0.5 dark:bg-neutral-700 bg-zinc-200 p-1 rounded-sm">
-              <CommandIcon className="w-3 h-3" />
-              <span>k</span>
-            </div>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) setSearchedInput("");
+        setIsOpen(open);
+      }}
+    >
+      <DialogTrigger asChild>
+        <div className="relative flex items-center gap-2 border rounded-md px-2">
+          <Input className="border-none" placeholder="Search" type="search" />
+          <div className="right-4 absolute flex items-center text-muted-foreground bg-accent rounded-md border shadow">
+            <CommandIcon />
+            <span>k</span>
           </div>
-        </DialogTrigger>
-        <DialogContent className="p-0 max-w-[650px] sm:top-[38%] top-[45%]">
-          <DialogHeader>
-            <input
-              value={searchedInput}
-              onChange={(e) => setSearchedInput(e.target.value)}
-              placeholder="Type something to search..."
-              autoFocus
-              className="h-14 px-4 bg-transparent border-b text-[15px] outline-none"
-            />
-          </DialogHeader>
-          {filteredResults.length == 0 && searchedInput && (
-            <p className="text-muted-foreground mx-auto mt-2 text-sm">
-              No results found for{" "}
-              <span className="text-primary">{`"${searchedInput}"`}</span>
-            </p>
-          )}
-          <ScrollArea className="max-h-[350px]">
-            <div className="flex flex-col items-start overflow-y-auto sm:px-3 px-1 pb-4 gap-0.5">
-              {filteredResults.map((item) => (
-                <DialogClose
-                  onChange={(val) => console.log(val)}
-                  key={item.href}
-                  asChild
+        </div>
+      </DialogTrigger>
+      <DialogContent className="p-0">
+        <DialogHeader>
+          <Input
+            value={searchedInput}
+            onChange={(e) => setSearchedInput(e.target.value)}
+            placeholder="Type something to search..."
+            autoFocus
+            className="h-14 focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
+        </DialogHeader>
+        {results.length == 0 && searchedInput && (
+          <p className="m-auto text-muted-foreground">
+            No results found for{" "}
+            <span className="text-primary">{`"${searchedInput}"`}</span>
+          </p>
+        )}
+        <ScrollArea className="max-h-80">
+          <ul className="flex flex-col items-start gap-2 overflow-y-auto text-muted-foreground p-2">
+            {results.map((res) => {
+              return (
+                <li
+                  key={res.href}
+                  className="w-full hover:bg-muted rounded-md p-2"
                 >
-                  <Anchor
-                    className="dark:hover:bg-neutral-900 hover:bg-neutral-100 w-full p-2.5 px-3 rounded-sm text-[15px] flex items-center gap-2.5"
-                    href={`${item.href}`}
-                    activeClassName="dark:bg-neutral-900 bg-neutral-100"
-                  >
-                    <FileTextIcon className="h-[1.1rem] w-[1.1rem]" />{" "}
-                    {item.title}
-                  </Anchor>
-                </DialogClose>
-              ))}
-            </div>
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-    </div>
+                  <DialogClose onChange={(val) => console.log(val)} asChild>
+                    <Link href={res.href} className="flex items-center gap-2">
+                      <FileTextIcon className="h-6 w-6" />
+                      <span>{res.title}</span>
+                    </Link>
+                  </DialogClose>
+                </li>
+              );
+            })}
+          </ul>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
   );
 }
