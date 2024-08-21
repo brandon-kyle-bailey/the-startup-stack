@@ -16,11 +16,11 @@ export default async function page({ params: { slug = [] } }: PageProps) {
   }
   const res = await getCachedMarkdown(slug.join("/"));
   return (
-    <main className="p-8 lg:px-16 min-h-screen flex flex-col lg:gap-32">
+    <main className="p-8 lg:px-16 min-h-screen flex flex-col">
       <NavigationComponent links={DOCS_PAGE_ROUTES} />
-      <div className="w-full flex justify-around">
-        <div>left</div>
-        <div>
+      <div className="w-full flex gap-64 justify-center mt-10 mb-10">
+        <div className="hidden md:block">left</div>
+        <div className="">
           <BreadcrumbComponent paths={slug} />
           <MarkdownComponent>
             <h1>{res.frontmatter.title}</h1>
@@ -31,7 +31,7 @@ export default async function page({ params: { slug = [] } }: PageProps) {
             <div>pagination</div>
           </MarkdownComponent>
         </div>
-        <div>right</div>
+        <div className="hidden lg:block">right</div>
       </div>
       <FooterSection />
     </main>
