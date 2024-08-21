@@ -54,7 +54,7 @@ export default function Search({
       <DialogTrigger asChild>
         <div className="relative flex items-center gap-2 border rounded-md px-2">
           <Input className="border-none" placeholder="Search" type="search" />
-          <div className="right-4 absolute flex items-center text-muted-foreground bg-accent rounded-md border shadow">
+          <div className="right-4 absolute flex items-center text-muted-foreground bg-accent rounded-md border">
             <CommandIcon />
             <span>k</span>
           </div>

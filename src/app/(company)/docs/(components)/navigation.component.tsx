@@ -158,24 +158,7 @@ export default function DocsNavigationComponent() {
         </NavigationMenu>
       </div>
       <div className="max-sm:hidden flex gap-2">
-        <Search
-          links={[
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-            { href: "hello world", title: "hello world" },
-          ]}
-        />
+        <Search links={[]} />
         <ModeToggle />
         <Link href={"/login"}>
           <Button variant={"ghost"}>Sign in</Button>
