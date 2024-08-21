@@ -1,8 +1,30 @@
 export const DOCS_ROUTES = [
   {
     title: "Getting Started",
-    href: "getting-started/",
-    items: [{ title: "Introduction", href: "introduction" }],
+    href: "getting-started",
+    items: [
+      { title: "Introduction", href: "introduction" },
+      { title: "Installation", href: "installation" },
+      { title: "Project Structure", href: "project-structure" },
+    ],
+  },
+  {
+    title: "Getting Started",
+    href: "getting-started",
+    items: [
+      { title: "Introduction", href: "introduction" },
+      { title: "Installation", href: "installation" },
+      { title: "Project Structure", href: "project-structure" },
+    ],
+  },
+  {
+    title: "Getting Started",
+    href: "getting-started",
+    items: [
+      { title: "Introduction", href: "introduction" },
+      { title: "Installation", href: "installation" },
+      { title: "Project Structure", href: "project-structure" },
+    ],
   },
 ];
 
@@ -10,7 +32,7 @@ export const DOCS_PAGE_ROUTES = DOCS_ROUTES.map(({ href, items }) => {
   return items.map((link) => {
     return {
       title: link.title,
-      href: "docs/" + href + link.href,
+      href: "docs/" + href + "/" + link.href,
     };
   });
 }).flat();

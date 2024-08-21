@@ -3,7 +3,9 @@ import FooterSection from "@/app/(components)/footer.component";
 import NavigationComponent from "@/app/(components)/navigation.component";
 import BreadcrumbComponent from "@/components/breadcrumb";
 import MarkdownComponent from "@/components/markdown";
-import { DOCS_PAGE_ROUTES } from "@/lib/content/docs/routes";
+import PaginationComponent from "@/components/pagination";
+import { DOCS_PAGE_ROUTES, DOCS_ROUTES } from "@/lib/content/docs/routes";
+import Link from "next/link";
 
 type PageProps = {
   params: { slug: string[] };
@@ -11,7 +13,7 @@ type PageProps = {
 
 export default async function page({ params: { slug = [] } }: PageProps) {
   slug.unshift("docs");
-  if (slug.length === 1) {
+  if (slug.length < 3) {
     slug = DOCS_PAGE_ROUTES[0].href.split("/");
   }
   const res = await getCachedMarkdown(slug.join("/"));
@@ -19,8 +21,39 @@ export default async function page({ params: { slug = [] } }: PageProps) {
     <main className="p-8 lg:px-16 min-h-screen flex flex-col">
       <NavigationComponent links={DOCS_PAGE_ROUTES} />
       <div className="w-full flex gap-64 justify-center mt-10 mb-10">
-        <div className="hidden md:block">left</div>
-        <div className="">
+        <div className="hidden md:block">
+          <ul className="text-muted-foreground flex flex-col gap-2">
+            {DOCS_ROUTES.map((ele, idx) => {
+              return (
+                <li key={idx}>
+                  <Link
+                    href={`/docs/${ele.href}`}
+                    className="hover:text-primary"
+                  >
+                    {ele.title}
+                  </Link>
+                  {ele.items.length > 0 && (
+                    <ul className="pl-4">
+                      {ele.items.map((subele, subeleidx) => {
+                        return (
+                          <li key={subeleidx}>
+                            <Link
+                              href={`/docs/${ele.href}/${subele.href}`}
+                              className="hover:text-primary"
+                            >
+                              {subele.title}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
           <BreadcrumbComponent paths={slug} />
           <MarkdownComponent>
             <h1>{res.frontmatter.title}</h1>
@@ -28,7 +61,10 @@ export default async function page({ params: { slug = [] } }: PageProps) {
               {res.frontmatter.description}
             </p>
             <div>{res.content}</div>
-            <div>pagination</div>
+            <PaginationComponent
+              routes={DOCS_PAGE_ROUTES}
+              current={slug.join("/")}
+            />
           </MarkdownComponent>
         </div>
         <div className="hidden lg:block">right</div>
@@ -40,7 +76,7 @@ export default async function page({ params: { slug = [] } }: PageProps) {
 
 export async function generateMetadata({ params: { slug = [] } }: PageProps) {
   slug.unshift("docs");
-  if (slug.length === 1) {
+  if (slug.length < 3) {
     slug = DOCS_PAGE_ROUTES[0].href.split("/");
   }
   const res = await getCachedMarkdown(slug.join("/"));
