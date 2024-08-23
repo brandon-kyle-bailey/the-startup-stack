@@ -68,10 +68,6 @@
   }
 }
 
-.prose {
-  margin: 0 !important;
-}
-
 pre {
   padding: 0 !important;
   width: inherit !important;
@@ -82,10 +78,6 @@ pre > code {
   display: grid;
   max-width: inherit !important;
   padding: 14px 0 !important;
-}
-
-.code-line {
-  padding: 0.75px 12.5px;
 }
 
 .line-number::before {
@@ -99,63 +91,36 @@ pre > code {
   text-align: right;
 }
 
-.highlight-line {
-  @apply dark:bg-neutral-800/90;
-  @apply bg-neutral-200/90;
-}
-
 .punctuation {
   color: gray;
 }
-
 .comment {
   color: gray;
 }
-
 .keyword {
   color: rgb(255, 50, 115);
 }
-
 .function {
   color: hsla(210, 100%, 66%, 1);
 }
-
-.string,
 .constant,
 .annotation,
 .boolean,
 .number {
   color: hsl(0, 0%, 29%);
 }
-
-.dark .string,
-.dark .constant,
-.dark .annotation,
-.dark .boolean,
-.dark.number {
-  color: hsl(0, 0%, 71%);
-}
-
-.dark .keyword {
-  color: hsla(341, 90%, 67%, 1);
-}
-
 .attr-value {
   color: hsla(131, 43%, 57%, 1);
 }
-
 .tag {
   color: hsla(341, 90%, 67%, 1);
 }
-
 .attr-name {
   color: #414141;
 }
-
 .dark .attr-name {
   color: #cacaca;
 }
-
 .rehype-code-title {
   @apply px-2;
   @apply -mb-8;
@@ -168,8 +133,3 @@ pre > code {
   @apply font-medium;
   font-family: var(--font-code) !important;
 }
-
-.highlight-comp > code {
-  background-color: transparent !important;
-}
-

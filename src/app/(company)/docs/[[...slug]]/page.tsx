@@ -22,9 +22,9 @@ export default async function page({ params: { slug = [] } }: PageProps) {
   return (
     <main className="p-8 lg:px-16 min-h-screen flex flex-col">
       <NavigationComponent links={DOCS_PAGE_ROUTES} />
-      <div className="w-full flex justify-center lg:gap-64 mt-10 mb-10">
+      <div className="w-full flex justify-center lg:gap-32 mt-10 mb-10">
         <AsideComponent prefix="/docs" routes={DOCS_ROUTES} />
-        <div className="h-screen overflow-y-auto flex-1">
+        <div className="h-screen overflow-y-auto">
           <ScrollArea>
             <BreadcrumbComponent paths={slug} />
             <MarkdownComponent>
