@@ -5,11 +5,11 @@ export default function AsideComponent({
   prefix,
   routes,
 }: {
-  prefix: string;
+  prefix?: string;
   routes: {
     title: string;
     href: string;
-    items: { title: string; href: string }[];
+    items?: { title: string; href: string }[];
   }[];
 }) {
   return (
@@ -20,18 +20,22 @@ export default function AsideComponent({
             return (
               <li key={idx} className="flex flex-col gap-4">
                 <Link
-                  href={`${prefix}/${ele.href}`}
+                  href={prefix ? `${prefix}/${ele.href}` : `/${ele.href}`}
                   className="hover:text-primary"
                 >
                   {ele.title}
                 </Link>
-                {ele.items.length > 0 && (
+                {ele.items && ele.items.length > 0 && (
                   <ul className="pl-8 flex flex-col gap-4">
                     {ele.items.map((subele, subeleidx) => {
                       return (
                         <li key={subeleidx}>
                           <Link
-                            href={`${prefix}/${ele.href}/${subele.href}`}
+                            href={
+                              prefix
+                                ? `${prefix}/${ele.href}/${subele.href}`
+                                : `/${ele.href}/${subele.href}`
+                            }
                             className="hover:text-primary"
                           >
                             {subele.title}
