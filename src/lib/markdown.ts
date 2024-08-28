@@ -9,10 +9,19 @@ import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 
 // custom components imports
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/callout";
 import Pre from "@/components/pre";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MdxImage } from "@/components/image";
 
-type MdxFrontmatter = {
+export type BlogMdxFrontmatter = {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  authors: string;
+};
+export type DocsMdxFrontmatter = {
   title: string;
   description: string;
 };
@@ -24,13 +33,15 @@ const components = {
   TabsList,
   TabsTrigger,
   pre: Pre,
+  Callout,
+  Image: MdxImage,
 };
 
 export async function getMarkdownForSlug(slug: string) {
   try {
     const contentPath = getContentPath(slug);
     const rawMdx = await fs.readFile(contentPath, "utf-8");
-    return await compileMDX<MdxFrontmatter>({
+    return await compileMDX<BlogMdxFrontmatter | DocsMdxFrontmatter>({
       source: rawMdx,
       options: {
         parseFrontmatter: true,
@@ -91,6 +102,22 @@ function sluggify(text: string) {
 
 function getContentPath(slug: string) {
   return path.join(process.cwd(), "/src/content/", `${slug}.mdx`);
+}
+
+export async function getMarkdownForAllBlogPosts() {
+  const root = path.join(process.cwd(), "src", "content", "blog");
+  console.log("root", root);
+  const results = [];
+  const files = await fs.readdir(root);
+  console.log("files", files);
+  for (const f of files) {
+    console.log("file", f);
+    results.push(
+      await getMarkdownForSlug(path.join("blog", f.replace(".mdx", ""))),
+    );
+  }
+  // TODO: return the slug as a key for linking
+  return results;
 }
 
 // for copying the code

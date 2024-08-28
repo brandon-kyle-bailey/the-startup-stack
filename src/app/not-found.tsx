@@ -1,6 +1,7 @@
+"use client";
 import { Hexagon } from "lucide-react";
 
-export default function ErrorPage() {
+export default function NotFoundPage() {
   return (
     <main className="flex min-h-screen">
       <div className="p-8 w-1/2 bg-primary flex flex-col justify-between text-background text-2xl">
@@ -18,8 +19,10 @@ export default function ErrorPage() {
         </blockquote>
       </div>
       <div className="p-4 w-1/2 bg-background flex flex-col gap-8 justify-center text-primary items-center">
-        <h1 className="text-4xl">Opps!</h1>
-        <p className="text-muted-foreground">It&apos;s not you, it&apos;s us</p>
+        <h1 className="text-4xl">Hmmm, something&apos;s missing.</h1>
+        <p className="text-muted-foreground">
+          We couldn&apos;t find what you were looking for.
+        </p>
       </div>
     </main>
   );
