@@ -1,3 +1,4 @@
+import { getUser } from "@/app/actions";
 import { ModeToggle } from "@/components/mode-toggle";
 import Search from "@/components/search";
 import { Button } from "@/components/ui/button";
@@ -21,11 +22,12 @@ import { Hexagon } from "lucide-react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-export default function NavigationSection({
+export default async function NavigationSection({
   links,
 }: {
   links: { title: string; href: string }[];
 }) {
+  const user = await getUser();
   return (
     <section id="navigation" className="flex justify-between">
       <div className="hidden max-sm:flex">
@@ -164,12 +166,20 @@ export default function NavigationSection({
       <div className="max-sm:hidden flex gap-2">
         <Search links={links} />
         <ModeToggle />
-        <Link href={"/login"}>
-          <Button variant={"ghost"}>Sign in</Button>
-        </Link>
-        <Link href={"/register"}>
-          <Button variant={"default"}>Register</Button>
-        </Link>
+        {user ? (
+          <Link href={"/dashboard"}>
+            <Button variant={"default"}>Dashboard</Button>
+          </Link>
+        ) : (
+          <>
+            <Link href={"/login"}>
+              <Button variant={"ghost"}>Sign in</Button>
+            </Link>
+            <Link href={"/register"}>
+              <Button variant={"default"}>Register</Button>
+            </Link>
+          </>
+        )}
       </div>
     </section>
   );

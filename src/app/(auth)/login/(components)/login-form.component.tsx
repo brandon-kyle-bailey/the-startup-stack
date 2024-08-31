@@ -41,11 +41,13 @@ export default function LoginFormComponent() {
       email: data.email,
       password: data.password,
     });
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: `There was a problem with your request. ${error}`,
-    });
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `There was a problem with your request. ${error}`,
+      });
+    }
   }
 
   return (

@@ -46,11 +46,13 @@ export default function RegisterFormComponent() {
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const error = await signup({ email: data.email, password: data.password });
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: `There was a problem with your request. ${error}`,
-    });
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `There was a problem with your request. ${error}`,
+      });
+    }
   }
   return (
     <>
