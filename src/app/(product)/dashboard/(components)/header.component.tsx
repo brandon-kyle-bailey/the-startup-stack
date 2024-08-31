@@ -1,5 +1,5 @@
 "use client";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
+import { CircleUser, Hexagon, Menu, Search } from "lucide-react";
 import Link from "next/link";
 
 import { logout } from "@/app/(auth)/logout/actions";
@@ -52,7 +52,7 @@ export default function DashboardHeaderComponent({
               href="#"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <Package2 className="h-6 w-6" />
+              <Hexagon className="h-6 w-6" />
               <SheetTitle className="sr-only">The Startup Stack</SheetTitle>
               <SheetDescription className="sr-only">
                 Dashboard navigation for startup stack

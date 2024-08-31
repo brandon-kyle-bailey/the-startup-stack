@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Bell, Package2 } from "lucide-react";
+import { Bell, Hexagon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -26,7 +26,7 @@ export default function DashboardAsideComponent({
             href="/dashboard"
             className="flex items-center gap-2 font-semibold"
           >
-            <Package2 className="h-6 w-6" />
+            <Hexagon className="h-6 w-6" />
             <span className="">The Startup Stack</span>
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -53,7 +53,7 @@ export default function DashboardAsideComponent({
             })}
           </nav>
         </div>
-        <div className="mt-auto p-4">
+        <div className="mt-auto p-4 hidden">
           <Card x-chunk="dashboard-02-chunk-0">
             <CardHeader className="p-2 pt-0 md:p-4">
               <CardTitle>Upgrade to Pro</CardTitle>
