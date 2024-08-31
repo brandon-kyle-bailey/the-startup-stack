@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { redirect, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export default function DashboardHeaderComponent({
   links,
