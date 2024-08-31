@@ -2,6 +2,7 @@
 import { CircleUser, Menu, Package2, Search } from "lucide-react";
 import Link from "next/link";
 
+import { logout } from "@/app/(auth)/logout/actions";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,13 +22,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { logout } from "@/app/(auth)/logout/actions";
+import { redirect, usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default function DashboardHeaderComponent({
   links,
 }: {
   links: { title: string; href: string }[];
 }) {
+  const pathname = usePathname();
   return (
     <header className="flex h-14 align-middle items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -51,7 +54,11 @@ export default function DashboardHeaderComponent({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  className={cn(
+                    pathname.toLowerCase() === link.href.toLowerCase()
+                      ? "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 bg-muted text-primary hover:text-foreground"
+                      : "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground",
+                  )}
                 >
                   {link.title}
                 </Link>
@@ -98,7 +105,9 @@ export default function DashboardHeaderComponent({
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/dashboard/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => logout()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>

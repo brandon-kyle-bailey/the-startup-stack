@@ -3,7 +3,7 @@ import DashboardWrapperComponent from "@/app/(product)/dashboard/(components)/wr
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 
-export default function Dashboard() {
+export default function Settings() {
   const pathname = usePathname();
   return (
     <DashboardWrapperComponent>
