@@ -21,7 +21,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -47,7 +53,10 @@ export default function DashboardHeaderComponent({
               className="flex items-center gap-2 text-lg font-semibold"
             >
               <Package2 className="h-6 w-6" />
-              <span className="sr-only">The Startup Stack</span>
+              <SheetTitle className="sr-only">The Startup Stack</SheetTitle>
+              <SheetDescription className="sr-only">
+                Dashboard navigation for startup stack
+              </SheetDescription>
             </Link>
             {links.map((link) => {
               return (
