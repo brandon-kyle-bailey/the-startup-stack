@@ -35,9 +35,9 @@ export default async function NavigationSection({
           <SheetTrigger asChild>
             <GiHamburgerMenu />
           </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col gap-2">
+          <SheetContent side="left" className="flex flex-col">
             <SheetHeader>
-              <SheetTitle className="flex flex-row gap-2 justify-center items-center font-semibold">
+              <SheetTitle className="flex items-center">
                 <Link href="/">
                   <Hexagon />
                   <p>The Startup Stack</p>
@@ -86,30 +86,44 @@ export default async function NavigationSection({
                 </Button>
               </Link>
             </SheetClose>
-            <SheetClose asChild>
-              <Link href="/login">
-                <Button variant="ghost" className="w-full">
-                  Sign in
-                </Button>
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link href="/register">
-                <Button variant="default" className="w-full">
-                  Register
-                </Button>
-              </Link>
-            </SheetClose>
+            {user ? (
+              <>
+                <SheetClose asChild>
+                  <Link href="/dashboard">
+                    <Button variant="default" className="w-full">
+                      Dashboard
+                    </Button>
+                  </Link>
+                </SheetClose>
+              </>
+            ) : (
+              <>
+                <SheetClose asChild>
+                  <Link href="/login">
+                    <Button variant="ghost" className="w-full">
+                      Sign in
+                    </Button>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/register">
+                    <Button variant="default" className="w-full">
+                      Register
+                    </Button>
+                  </Link>
+                </SheetClose>
+              </>
+            )}
             <SheetFooter></SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
-      <div className="max-sm:hidden flex flex-row gap-2 justify-center items-center font-semibold">
-        <Link href="/" className="flex gap-2">
+      <div className="max-sm:hidden flex items-center">
+        <Link href="/" className="flex">
           <Hexagon />
           <p>The Startup Stack</p>
         </Link>
-        <NavigationMenu className="text-muted-foreground">
+        <NavigationMenu className="">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/#use-case" legacyBehavior passHref>
@@ -163,7 +177,7 @@ export default async function NavigationSection({
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className="max-sm:hidden flex gap-2">
+      <div className="max-sm:hidden flex items-center gap-4">
         <Search links={links} />
         <ModeToggle />
         {user ? (

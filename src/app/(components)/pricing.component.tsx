@@ -137,41 +137,36 @@ const pricingPlans = [
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
   return (
-    <section
-      id="pricing"
-      className="flex flex-col items-center gap-6 text-muted-foreground"
-    >
-      <h1 className="text-2xl text-primary">
-        Choose the right pricing plan for you
-      </h1>
+    <section id="pricing" className="flex flex-col items-center gap-8">
+      <h1 className="">Choose the right pricing plan for you</h1>
       <p>Pricing and Subscription models suitable for all professionals</p>
-      <span className="flex items-center gap-2">
+      <span className="">
         <Switch id="annual" onCheckedChange={() => setIsAnnual(!isAnnual)} />
         <Label htmlFor="annual">{isAnnual ? "Annually" : "Monthly"}</Label>
         <Badge>Save up to 17% on Annual pricing!</Badge>
       </span>
-      <div className="lg:w-3/4 flex flex-col lg:flex-row justify-center gap-8">
+      <div className="flex gap-8 justify-center">
         {pricingPlans.map((plan) => {
           return (
             <Card
               key={plan.id}
               className={cn(
-                "shadow flex flex-col gap-4 justify-between items-center w-full text-muted-foreground",
+                "",
                 plan.popular
                   ? "bg-gradient-to-br from-background to-secondary from-50%"
                   : "",
               )}
             >
-              <CardHeader className="w-full flex flex-col gap-4">
-                <div className="flex gap-2 text-primary">
+              <CardHeader className="">
+                <div className="">
                   <CardTitle>{plan.name}</CardTitle>
                   <Badge className={cn(!plan.popular ? "hidden" : "")}>
                     Our most popular plan
                   </Badge>
                 </div>
-                <CardDescription className="flex flex-col gap-2">
-                  <span className="flex flex-row gap-2">
-                    <span className="text-2xl">
+                <CardDescription className="">
+                  <span className="">
+                    <span className="">
                       ${isAnnual ? plan.annualPrice : plan.monthPrice}
                     </span>
                     <span>/ {isAnnual ? "Annually" : "Monthly"}</span>
@@ -190,14 +185,11 @@ export default function PricingSection() {
                   </Button>
                 </CardDescription>
               </CardHeader>
-              <CardContent className="w-full flex justify-start">
-                <ul className="flex flex-col gap-4">
+              <CardContent className="">
+                <ul className="">
                   {plan.fetaures.map((feature) => {
                     return (
-                      <li
-                        key={feature.id}
-                        className="flex flex-row items-center justify-center align-middle gap-1"
-                      >
+                      <li key={feature.id} className="">
                         <Check />
                         <p>{feature.description}</p>
                       </li>

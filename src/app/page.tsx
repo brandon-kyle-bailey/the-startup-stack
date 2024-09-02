@@ -10,7 +10,7 @@ import { LANDING_PAGE_LINKS } from "@/lib/constants/routes";
 
 export default function Dashboard() {
   return (
-    <main className="p-8 lg:px-16 min-h-screen flex flex-col lg:gap-32">
+    <main className="flex flex-col py-8 px-8 lg:px-32 gap-32">
       <NavigationSection links={LANDING_PAGE_LINKS} />
       <HeroSection />
       <TestimonialSection />

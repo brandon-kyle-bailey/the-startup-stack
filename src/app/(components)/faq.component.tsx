@@ -7,13 +7,9 @@ import {
 
 export default function FaqSection() {
   return (
-    <section id="faq" className="flex flex-col items-center">
-      <h1 className="text-2xl text-center">Frequently Asked Questions (FAQ)</h1>
-      <Accordion
-        type="single"
-        className="w-3/4 text-muted-foreground"
-        collapsible
-      >
+    <section id="faq" className="flex flex-col items-center gap-8">
+      <h1 className="">Frequently Asked Questions (FAQ)</h1>
+      <Accordion type="single" className="w-full" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             Do I get access to this landing page in the starter kit?

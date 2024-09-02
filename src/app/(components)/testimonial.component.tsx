@@ -45,42 +45,38 @@ export default function TestimonialSection() {
     Autoplay({ delay: 5000, stopOnInteraction: true }),
   );
   return (
-    <section id="testimonials" className="flex flex-col items-center gap-6">
-      <h1 className="text-2xl text-center">Hear from our customers</h1>
-      <div className="w-full lg:w-3/4 flex gap-8">
+    <section id="testimonials" className="flex flex-col items-center gap-4">
+      <h1 className="">Hear from our customers</h1>
+      <div className="w-full">
         <Carousel
           // @ts-ignore: mismatch type error
           plugins={[plugin.current]}
           onMouseEnter={plugin.current.stop}
           onMouseLeave={plugin.current.reset}
-          className="w-full"
+          className=""
         >
           <CarouselContent>
             {testimonials.map((testimonial) => {
               return (
                 <CarouselItem key={testimonial.id} className="lg:basis-1/3">
-                  <Card className="flex flex-col gap-4 border-none shadow-none">
-                    <CardHeader className="flex flex-col gap-4">
-                      <CardDescription className="w-full flex justify-center">
-                        <span className="text-lg">
+                  <Card className="border-none shadow-none flex flex-col items-center">
+                    <CardHeader className="">
+                      <CardDescription className="">
+                        <span className="">
                           &quot;{testimonial.quote}&quot;
                         </span>
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex gap-2 items-center w-full justify-center">
+                    <CardContent className="flex items-center gap-4">
                       <Image
                         alt={testimonial.quote}
                         width={500}
                         height={500}
                         src={testimonial.image}
-                        className="w-28 h-28 bg-accent rounded-full border"
+                        className="rounded-full w-1/4"
                       />
-                      <span className="text-muted-foreground">
-                        {testimonial.name}
-                      </span>
-                      <span className="text-muted-foreground">
-                        {testimonial.company}
-                      </span>
+                      <span className="">{testimonial.name}</span>
+                      <span className="">{testimonial.company}</span>
                     </CardContent>
                   </Card>
                 </CarouselItem>
