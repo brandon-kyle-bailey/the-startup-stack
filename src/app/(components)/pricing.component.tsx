@@ -140,7 +140,7 @@ export default function PricingSection() {
     <section id="pricing" className="flex flex-col items-center gap-8">
       <h1 className="">Choose the right pricing plan for you</h1>
       <p>Pricing and Subscription models suitable for all professionals</p>
-      <span className="">
+      <span className="flex gap-4 items-center">
         <Switch id="annual" onCheckedChange={() => setIsAnnual(!isAnnual)} />
         <Label htmlFor="annual">{isAnnual ? "Annually" : "Monthly"}</Label>
         <Badge>Save up to 17% on Annual pricing!</Badge>
@@ -152,19 +152,21 @@ export default function PricingSection() {
               key={plan.id}
               className={cn(
                 "",
-                plan.popular
-                  ? "bg-gradient-to-br from-background to-secondary from-50%"
-                  : "",
+                plan.popular ? "bg-primary text-background" : "",
               )}
             >
               <CardHeader className="">
-                <div className="">
+                <div className="flex justify-between">
                   <CardTitle>{plan.name}</CardTitle>
-                  <Badge className={cn(!plan.popular ? "hidden" : "")}>
+                  <Badge
+                    className={cn(
+                      plan.popular ? "bg-background text-primary" : "hidden",
+                    )}
+                  >
                     Our most popular plan
                   </Badge>
                 </div>
-                <CardDescription className="">
+                <CardDescription className="flex flex-col gap-4">
                   <span className="">
                     <span className="">
                       ${isAnnual ? plan.annualPrice : plan.monthPrice}
@@ -174,6 +176,10 @@ export default function PricingSection() {
                   <span>{plan.description}</span>
                   <Button
                     variant="default"
+                    className={cn(
+                      "",
+                      plan.popular ? "bg-background text-primary" : "",
+                    )}
                     onClick={() =>
                       handleStripeCheckout(
                         isAnnual ? plan.annualPrice : plan.monthPrice,
@@ -186,10 +192,10 @@ export default function PricingSection() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="">
-                <ul className="">
+                <ul className="flex flex-col gap-8">
                   {plan.fetaures.map((feature) => {
                     return (
-                      <li key={feature.id} className="">
+                      <li key={feature.id} className="flex gap-4">
                         <Check />
                         <p>{feature.description}</p>
                       </li>
