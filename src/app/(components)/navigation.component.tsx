@@ -38,7 +38,7 @@ export default async function NavigationSection({
           <SheetContent side="left" className="flex flex-col">
             <SheetHeader>
               <SheetTitle className="flex items-center">
-                <Link href="/">
+                <Link href="/" className="flex items-center">
                   <Hexagon />
                   <p>The Startup Stack</p>
                 </Link>

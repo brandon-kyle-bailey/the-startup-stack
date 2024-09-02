@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function FooterSection() {
   return (
     <footer id="footer">
-      <ul className="flex gap-8 items-center justify-between">
+      <ul className="flex flex-col lg:flex-row gap-8 items-center justify-between">
         <li>&copy; Copyright 2024 The Startup Stack</li>
         <li>
           <Link href="/terms-of-service">Terms of Service</Link>
