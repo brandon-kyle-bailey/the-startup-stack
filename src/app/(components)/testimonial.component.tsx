@@ -3,9 +3,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   Carousel,
@@ -46,7 +44,10 @@ export default function TestimonialSection() {
   );
   return (
     <section id="testimonials" className="flex flex-col items-center gap-4">
-      <h1 className="">Hear from our customers</h1>
+      <h1 className="text-5xl font-semibold">Hear from our customers</h1>
+      <p className="text-muted-foreground text-xl">
+        Hear what some of our customers have to say
+      </p>
       <div className="w-full">
         <Carousel
           // @ts-ignore: mismatch type error
@@ -60,9 +61,9 @@ export default function TestimonialSection() {
               return (
                 <CarouselItem key={testimonial.id} className="lg:basis-1/3">
                   <Card className="border-none shadow-none flex flex-col items-center">
-                    <CardHeader className="">
+                    <CardHeader className="w-full">
                       <CardDescription className="">
-                        <span className="">
+                        <span className="text-lg">
                           &quot;{testimonial.quote}&quot;
                         </span>
                       </CardDescription>

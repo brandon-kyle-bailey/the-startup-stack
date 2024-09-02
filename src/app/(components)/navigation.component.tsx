@@ -118,8 +118,8 @@ export default async function NavigationSection({
           </SheetContent>
         </Sheet>
       </div>
-      <div className="max-sm:hidden flex items-center">
-        <Link href="/" className="flex">
+      <div className="max-sm:hidden flex items-center text-muted-foreground">
+        <Link href="/" className="flex text-primary">
           <Hexagon />
           <p>The Startup Stack</p>
         </Link>
@@ -182,7 +182,9 @@ export default async function NavigationSection({
         <ModeToggle />
         {user ? (
           <Link href={"/dashboard"}>
-            <Button variant={"default"}>Dashboard</Button>
+            <Button className="rounded-lg border shadow-lg" variant={"default"}>
+              Dashboard
+            </Button>
           </Link>
         ) : (
           <>
@@ -190,7 +192,12 @@ export default async function NavigationSection({
               <Button variant={"ghost"}>Sign in</Button>
             </Link>
             <Link href={"/register"}>
-              <Button variant={"default"}>Register</Button>
+              <Button
+                className="rounded-lg border shadow-lg"
+                variant={"default"}
+              >
+                Register
+              </Button>
             </Link>
           </>
         )}

@@ -8,7 +8,9 @@ import {
 export default function FaqSection() {
   return (
     <section id="faq" className="flex flex-col items-center gap-8">
-      <h1 className="">Frequently Asked Questions (FAQ)</h1>
+      <h1 className="text-5xl font-semibold">
+        Frequently Asked Questions (FAQ)
+      </h1>
       <Accordion type="single" className="w-full" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>

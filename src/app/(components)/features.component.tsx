@@ -77,12 +77,14 @@ const features = [
 export default function FeaturesSection() {
   return (
     <section id="features" className="flex flex-col items-center gap-8">
-      <h1 className="">Features</h1>
-      <p>Jam packed with all the best technologies</p>
+      <h1 className="text-5xl font-semibold">Features</h1>
+      <p className="text-xl text-muted-foreground">
+        Jam packed with all the best technologies
+      </p>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
         {features.map((feature) => {
           return (
-            <Card key={feature.id}>
+            <Card key={feature.id} className="border rounded-lg shadow-lg">
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <CardTitle>{feature.title}</CardTitle>
