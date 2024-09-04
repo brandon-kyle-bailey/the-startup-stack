@@ -13,10 +13,10 @@ export default function DynamicBreadcrumbComponent({
 }) {
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className="flex">
         {paths.map((ele, idx) => {
           return (
-            <div key={ele} className="flex gap-2 items-center">
+            <div key={ele} className="flex items-center gap-4">
               <BreadcrumbItem>
                 {idx === paths.length - 1 ? (
                   <BreadcrumbPage>{ele}</BreadcrumbPage>

@@ -38,22 +38,22 @@ export default function DashboardHeaderComponent({
 }) {
   const pathname = usePathname();
   return (
-    <header className="flex h-14 align-middle items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+    <header className="bg-muted/40 flex h-16 align-middle items-center gap-4 border-b px-4 lg:h-[60px]">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-            <Menu className="h-5 w-5" />
+            <Menu className="h-8 w-8" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
-          <nav className="grid gap-2 text-lg font-medium">
+          <nav className="grid gap-4 text-lg font-medium">
             <Link
               href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
+              className="flex items-center gap-4 text-lg font-semibold"
             >
-              <Hexagon className="h-6 w-6" />
-              <SheetTitle className="sr-only">The Startup Stack</SheetTitle>
+              <Hexagon className="h-8 w-8" />
+              <SheetTitle>The Startup Stack</SheetTitle>
               <SheetDescription className="sr-only">
                 Dashboard navigation for startup stack
               </SheetDescription>
@@ -65,8 +65,8 @@ export default function DashboardHeaderComponent({
                   href={link.href}
                   className={cn(
                     pathname.toLowerCase() === link.href.toLowerCase()
-                      ? "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 bg-muted text-primary hover:text-foreground"
-                      : "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground",
+                      ? "mx-4 flex items-center gap-4 rounded-xl px-4 py-4 bg-muted text-primary hover:text-foreground"
+                      : "mx-4 flex items-center gap-4 rounded-xl px-4 py-4 text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {link.title}
@@ -95,7 +95,7 @@ export default function DashboardHeaderComponent({
       <div className="w-full flex-1">
         <form>
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search..."
@@ -107,7 +107,7 @@ export default function DashboardHeaderComponent({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
+            <CircleUser className="h-6 w-6" />
             <span className="sr-only">Toggle user menu</span>
           </Button>
         </DropdownMenuTrigger>
