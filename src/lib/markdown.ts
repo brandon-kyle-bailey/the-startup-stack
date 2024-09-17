@@ -19,6 +19,7 @@ export type BlogMdxFrontmatter = {
   description: string;
   image: string;
   date: string;
+  url: string;
   authors: string;
 };
 export type DocsMdxFrontmatter = {

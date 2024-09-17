@@ -2,7 +2,6 @@ import FooterSection from "@/app/(components)/footer.component";
 import NavigationComponent from "@/app/(components)/navigation.component";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -10,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { BlogMdxFrontmatter, getMarkdownForAllBlogPosts } from "@/lib/markdown";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page() {
   const blogPosts = await getMarkdownForAllBlogPosts();
@@ -23,23 +23,27 @@ export default async function Page() {
           {blogPosts.map((post) => {
             return (
               <Card key={post!.frontmatter.title} className="w-1/2">
-                <CardHeader>
-                  <Image
-                    src={(post!.frontmatter as BlogMdxFrontmatter).image}
-                    alt="cunt"
-                    width="1920"
-                    height="1080"
-                    className="w-full"
-                  />
-                  <CardTitle>{post!.frontmatter.title}</CardTitle>
-                  <CardDescription>
-                    {post!.frontmatter.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                  <p>{(post!.frontmatter as BlogMdxFrontmatter).date}</p>
-                  <p>{(post!.frontmatter as BlogMdxFrontmatter).authors}</p>
-                </CardFooter>
+                <Link
+                  href={`blog/${(post!.frontmatter as BlogMdxFrontmatter).url}`}
+                >
+                  <CardHeader>
+                    <Image
+                      src={(post!.frontmatter as BlogMdxFrontmatter).image}
+                      alt="cunt"
+                      width="1920"
+                      height="1080"
+                      className="w-full"
+                    />
+                    <CardTitle>{post!.frontmatter.title}</CardTitle>
+                    <CardDescription>
+                      {post!.frontmatter.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter>
+                    <p>{(post!.frontmatter as BlogMdxFrontmatter).date}</p>
+                    <p>{(post!.frontmatter as BlogMdxFrontmatter).authors}</p>
+                  </CardFooter>
+                </Link>
               </Card>
             );
           })}

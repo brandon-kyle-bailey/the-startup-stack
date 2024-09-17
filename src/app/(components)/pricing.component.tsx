@@ -167,7 +167,9 @@ export default function PricingSection() {
                   <CardTitle>{plan.name}</CardTitle>
                   <Badge
                     className={cn(
-                      plan.popular ? "bg-background text-primary" : "hidden",
+                      plan.popular
+                        ? "bg-background text-primary hover:bg-background"
+                        : "hidden",
                     )}
                   >
                     Our most popular plan
