@@ -17,7 +17,8 @@
     "stripe:proxy": "stripe listen --forward-to localhost:3000/api/payment/gateway/stripe/callback",
     "supabase:init": "npx supabase init",
     "supabase:start": "npx supabase start",
-    "supabase:stop": "npx supabase stop"
+    "supabase:stop": "npx supabase stop",
+    "supabase:status": "npx supabase status"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -59,7 +60,7 @@
     "embla-carousel-react": "^8.1.8",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.427.0",
-    "next": "14.2.5",
+    "next": "^14.2.12",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-day-picker": "^8.10.1",

@@ -1,9 +1,10 @@
 "use server";
 
 import { toast } from "@/components/ui/use-toast";
+import { environmentContainer } from "@/lib/config/config";
+import { createClient } from "@/lib/supabase/server";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { createClient } from "@/utils/supabase/server";
 
 export async function getUser() {
   const supabase = createClient();
@@ -22,9 +23,7 @@ export async function handleStripeCheckout(price: string, isAnnual: boolean) {
     });
 
     if (data.sessionId) {
-      const stripe = await loadStripe(
-        process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!,
-      );
+      const stripe = await loadStripe(environmentContainer.stripe.public_key!);
 
       const response = await stripe!.redirectToCheckout({
         sessionId: data.sessionId,

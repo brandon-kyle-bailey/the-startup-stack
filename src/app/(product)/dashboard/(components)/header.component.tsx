@@ -2,7 +2,6 @@
 import { CircleUser, Hexagon, Menu, Search } from "lucide-react";
 import Link from "next/link";
 
-import { logout } from "@/app/(auth)/logout/actions";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { logout } from "@/app/(product)/(auth)/logout/actions";
 
 export default function DashboardHeaderComponent({
   links,

@@ -1,11 +1,11 @@
-import FaqSection from "@/app/(components)/faq.component";
-import FeaturesSection from "@/app/(components)/features.component";
-import FooterSection from "@/app/(components)/footer.component";
-import HeroSection from "@/app/(components)/hero.component";
-import NavigationSection from "@/app/(components)/navigation.component";
-import PricingSection from "@/app/(components)/pricing.component";
-import TestimonialSection from "@/app/(components)/testimonial.component";
-import UsecaseSection from "@/app/(components)/use-case.component";
+import FaqSection from "@/app/_components/faq.component";
+import FeaturesSection from "@/app/_components/features.component";
+import FooterSection from "@/app/_components/footer.component";
+import HeroSection from "@/app/_components/hero.component";
+import NavigationSection from "@/app/_components/navigation.component";
+import PricingSection from "@/app/_components/pricing.component";
+import TestimonialSection from "@/app/_components/testimonial.component";
+import UsecaseSection from "@/app/_components/use-case.component";
 import { LANDING_PAGE_LINKS } from "@/lib/constants/routes";
 
 export default function Dashboard() {

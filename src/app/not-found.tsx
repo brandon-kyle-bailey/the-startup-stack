@@ -1,4 +1,3 @@
-"use client";
 import { Hexagon } from "lucide-react";
 
 export default function NotFoundPage() {

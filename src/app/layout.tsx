@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
+// TODO:... handle metadata correctly using generateStaticMetadata
 export const metadata: Metadata = {
   title: "The Startup Stack - A brilliant starter kit",
   description:
