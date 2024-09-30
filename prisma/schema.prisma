@@ -53,13 +53,12 @@ model teams {
 }
 
 model users {
-  id            Int      @id @default(autoincrement())
-  name          String?  @db.VarChar(100)
-  email         String   @unique @db.VarChar(255)
+  id            Int       @id @default(autoincrement())
+  name          String?   @db.VarChar(100)
+  email         String    @unique @db.VarChar(255)
   password_hash String
-  role          String   @default("member") @db.VarChar(20)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
-  deleted_at DateTime?
+  role          String    @default("member") @db.VarChar(20)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  deleted_at    DateTime?
 }
