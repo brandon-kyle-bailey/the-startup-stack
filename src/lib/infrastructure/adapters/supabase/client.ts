@@ -3,7 +3,7 @@ import { createBrowserClient } from "@supabase/ssr";
 
 export function createClient() {
   return createBrowserClient(
-    container.supabase.url!,
+    container.supabase.api_url!,
     container.supabase.anon_key!,
   );
 }

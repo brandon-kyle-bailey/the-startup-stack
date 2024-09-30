@@ -13,8 +13,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+model activity_logs {
+  id         Int      @id @default(autoincrement())
+  team_id    Int
+  user_id    Int?
+  action     String
+  timestamp  DateTime
+  ip_address String   @db.VarChar(45)
+}
+
+model invitations {
+  id         Int      @id @default(autoincrement())
+  team_id    Int
+  email      String   @db.VarChar(255)
+  role       String   @db.VarChar(50)
+  invited_by Int
+  invited_at DateTime @default(now())
+  status     String   @default("pending") @db.VarChar(20)
+}
+
+model team_members {
+  id        Int      @id @default(autoincrement())
+  user_id   Int
+  team_id   Int
+  role      String   @db.VarChar(50)
+  joined_at DateTime @default(now())
+}
+
+model teams {
+  id                     Int      @id @default(autoincrement())
+  name                   String   @db.VarChar(100)
+  created_at             DateTime @default(now())
+  updated_at             DateTime @updatedAt
+  stripe_customer_id     String?  @unique
+  stripe_subscription_id String?  @unique
+  stripe_product_id      String?
+  plan_name              String?  @db.VarChar(50)
+  subscription_status    String?  @db.VarChar(20)
+}
+
+model users {
+  id            Int      @id @default(autoincrement())
+  name          String?  @db.VarChar(100)
+  email         String   @unique @db.VarChar(255)
+  password_hash String
+  role          String   @default("member") @db.VarChar(20)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  deleted_at DateTime?
 }
