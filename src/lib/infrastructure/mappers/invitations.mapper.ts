@@ -1,14 +1,13 @@
 import { IMapper } from "@/lib/common/ddd/mapper.base";
-import { UserDto } from "@/lib/interface/dtos/users/user.dto";
 
-export class UsersMapper implements IMapper<any, any, UserDto> {
+export class InvitationsMapper implements IMapper<any, any, any> {
   toPersistence(entity: any) {
     return entity;
   }
   toDomain(record: any) {
     return record;
   }
-  toResponse(entity: any): UserDto {
+  toResponse(entity: any): any {
     return entity;
   }
 }
