@@ -18,7 +18,8 @@
     "supabase:init": "npx supabase init",
     "supabase:start": "npx supabase start",
     "supabase:stop": "npx supabase stop",
-    "supabase:status": "npx supabase status"
+    "supabase:status": "npx supabase status",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -71,14 +72,20 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@prisma/client": "^5.20.0",
     "@stripe/stripe-js": "^4.5.0",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
+    "husky": "^9.1.6",
     "postcss": "^8",
     "prisma": "^5.20.0",
     "supabase": "^1.200.3",

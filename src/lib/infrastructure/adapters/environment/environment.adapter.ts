@@ -1,5 +1,5 @@
-console.log("environment container env:", process.env);
 export const container = {
+  debug: process.env.DEBUG === "true" ? true : false,
   web: {
     host: process.env.HOST!,
   },
