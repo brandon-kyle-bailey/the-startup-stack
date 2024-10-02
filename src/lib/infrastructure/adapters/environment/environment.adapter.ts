@@ -1,5 +1,9 @@
 export const container = {
   debug: process.env.DEBUG === "true" ? true : false,
+  auth: {
+    emailRedirectTo: `${process.env.HOST!}/dashboard`,
+    updatePasswordRedirectTo: `${process.env.HOST!}/update-password`,
+  },
   web: {
     host: process.env.HOST!,
   },

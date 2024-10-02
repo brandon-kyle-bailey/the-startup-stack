@@ -1,8 +1,12 @@
+import { SessionAdapter } from "@/lib/infrastructure/adapters/session/session.adapter";
 import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function middleware(request: NextRequest) {
-  return NextResponse.next();
+export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.next();
+  }
+  return await SessionAdapter.ServerSession(request);
 }
 
 export const config = {
