@@ -8,11 +8,11 @@ import {
 } from "@/lib/common/utils/paginate.util";
 
 export interface IBasePort<T> {
-  getById(id: number): Promise<T>;
+  getById(id: string): Promise<T>;
   create(entity: T): Promise<T>;
-  update(id: number, entity: T): Promise<T>;
+  update(id: string, entity: T): Promise<T>;
   list(first?: number, after?: number): Promise<PaginatedResponse<T>>;
-  delete(id: number): Promise<T>;
+  delete(id: string): Promise<T>;
 }
 
 export abstract class BasePort<T extends Entity<any>> implements IBasePort<T> {
@@ -21,7 +21,7 @@ export abstract class BasePort<T extends Entity<any>> implements IBasePort<T> {
     private mapper: IMapper<any, T, any>,
     protected readonly logManager: ILogManager,
   ) {}
-  async getById(id: number): Promise<T> {
+  async getById(id: string): Promise<T> {
     const record = await this.repo.findUnique({ where: { id } });
     if (!record) {
       throw new NotFoundException(`Cannot find by id: ${id}`);
@@ -35,7 +35,7 @@ export abstract class BasePort<T extends Entity<any>> implements IBasePort<T> {
     });
     return this.mapper.toDomain(record);
   }
-  async update(id: number, entity: T): Promise<T> {
+  async update(id: string, entity: T): Promise<T> {
     const foundRecord = await this.getById(id);
     if (!foundRecord) {
       throw new NotFoundException(`Cannot find by id: ${id}`);
@@ -63,7 +63,7 @@ export abstract class BasePort<T extends Entity<any>> implements IBasePort<T> {
       after ?? records.length,
     );
   }
-  async delete(id: number): Promise<T> {
+  async delete(id: string): Promise<T> {
     const foundRecord = await this.getById(id);
     if (!foundRecord) {
       throw new NotFoundException(`Cannot find by id: ${id}`);

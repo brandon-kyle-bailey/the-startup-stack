@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {
     return NextResponse.next();
   }
-  return await SessionAdapter.ServerSession(request);
+  return await SessionAdapter.ServerSessionMiddleware(request);
 }
 
 export const config = {

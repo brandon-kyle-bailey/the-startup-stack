@@ -14,39 +14,39 @@ datasource db {
 }
 
 model activity_logs {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   team       teams    @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  team_id    Int
+  team_id    String   @db.Uuid
   user       users?   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_id    Int?
+  user_id    String?  @db.Uuid
   action     String
   timestamp  DateTime
   ip_address String   @db.VarChar(45)
 }
 
 model invitations {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   team       teams    @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  team_id    Int
+  team_id    String   @db.Uuid
   email      String   @db.VarChar(255)
   role       String   @db.VarChar(50)
-  invited_by Int
+  invited_by String   @db.Uuid
   invited_at DateTime @default(now())
   status     String   @default("pending") @db.VarChar(20)
 }
 
 model team_members {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_id   Int
+  user_id   String   @db.Uuid
   team      teams    @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  team_id   Int
+  team_id   String   @db.Uuid
   role      String   @db.VarChar(50)
   joined_at DateTime @default(now())
 }
 
 model teams {
-  id                     Int             @id @default(autoincrement())
+  id                     String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name                   String          @db.VarChar(100)
   created_at             DateTime        @default(now())
   updated_at             DateTime        @updatedAt
@@ -61,7 +61,7 @@ model teams {
 }
 
 model users {
-  id               Int             @id @default(autoincrement())
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name             String?         @db.VarChar(100)
   email            String          @unique @db.VarChar(255)
   password_hash    String

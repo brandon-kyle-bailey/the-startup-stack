@@ -1,3 +1,3 @@
 export interface GetUserByIdRequestDto {
-  id: number;
+  id: string;
 }

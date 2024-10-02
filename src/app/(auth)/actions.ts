@@ -1,43 +1,39 @@
 "use server";
 
-import { LogManager } from "@/lib/common/port/log/log-manager.port";
-import { UsersPort } from "@/lib/core/application/ports/users.port";
-import { databaseAdapter } from "@/lib/infrastructure/adapters/database/database.adapter";
-import { UsersMapper } from "@/lib/infrastructure/mappers/users.mapper";
-import { CreateUserRequestDto } from "@/lib/interface/dtos/users/create-user.request.dto";
-import { DeleteUserRequestDto } from "@/lib/interface/dtos/users/delete-user.request.dto";
-import { GetUserByIdRequestDto } from "@/lib/interface/dtos/users/get-user-by-id.request.dto";
-import { UpdateUserRequestDto } from "@/lib/interface/dtos/users/update-user.request.dto";
-import { UserDto } from "@/lib/interface/dtos/users/user.dto";
+import { AuthAdapter } from "@/lib/infrastructure/adapters/auth/auth.adapter";
+import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
+import { SignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-const logManager = new LogManager({ debug: true });
-const userMapper = new UsersMapper();
-const userPort = new UsersPort(databaseAdapter, userMapper, logManager);
+export async function loginAction(formData: FormData) {
+  const input: SigninRequestDto = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+  const result = await AuthAdapter.SigninWithPassword(input);
 
-export async function getUserById(
-  input: GetUserByIdRequestDto,
-): Promise<UserDto> {
-  return userMapper.toResponse(await userPort.getById(input.id));
+  if (result.error) {
+    console.log(result.error.message);
+    return;
+  }
+
+  revalidatePath("/dashboard", "layout");
+  redirect("/dashboard");
 }
 
-export async function createUser(
-  input: CreateUserRequestDto,
-): Promise<UserDto> {
-  return userMapper.toResponse(
-    await userPort.create(userMapper.toDomain(input)),
-  );
-}
+export async function signupAction(formData: FormData) {
+  const input: SignupRequestDto = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+  const result = await AuthAdapter.Signup(input);
 
-export async function updateUser(
-  input: UpdateUserRequestDto,
-): Promise<UserDto> {
-  return userMapper.toResponse(
-    await userPort.update(input.id, userMapper.toDomain(input)),
-  );
-}
+  if (result.error) {
+    console.log(result.error.message);
+    return;
+  }
 
-export async function deleteUser(
-  input: DeleteUserRequestDto,
-): Promise<UserDto> {
-  return userMapper.toResponse(await userPort.delete(input.id));
+  revalidatePath("/dashboard", "layout");
+  redirect("/dashboard");
 }

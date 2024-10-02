@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "activity_logs" (
-    "id" SERIAL NOT NULL,
-    "team_id" INTEGER NOT NULL,
-    "user_id" INTEGER,
+    "id" UUID NOT NULL,
+    "team_id" UUID NOT NULL,
+    "user_id" UUID,
     "action" TEXT NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL,
     "ip_address" VARCHAR(45) NOT NULL,
@@ -12,11 +12,11 @@ CREATE TABLE "activity_logs" (
 
 -- CreateTable
 CREATE TABLE "invitations" (
-    "id" SERIAL NOT NULL,
-    "team_id" INTEGER NOT NULL,
+    "id" UUID NOT NULL,
+    "team_id" UUID NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "role" VARCHAR(50) NOT NULL,
-    "invited_by" INTEGER NOT NULL,
+    "invited_by" UUID NOT NULL,
     "invited_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" VARCHAR(20) NOT NULL DEFAULT 'pending',
 
@@ -25,9 +25,9 @@ CREATE TABLE "invitations" (
 
 -- CreateTable
 CREATE TABLE "team_members" (
-    "id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "team_id" INTEGER NOT NULL,
+    "id" UUID NOT NULL,
+    "user_id" UUID NOT NULL,
+    "team_id" UUID NOT NULL,
     "role" VARCHAR(50) NOT NULL,
     "joined_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -36,7 +36,7 @@ CREATE TABLE "team_members" (
 
 -- CreateTable
 CREATE TABLE "teams" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE "teams" (
 
 -- CreateTable
 CREATE TABLE "users" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL,
     "name" VARCHAR(100),
     "email" VARCHAR(255) NOT NULL,
     "password_hash" TEXT NOT NULL,

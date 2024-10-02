@@ -13,9 +13,9 @@ export const container = {
   supabase: {
     api_url: process.env.SUPABASE_API_URL!,
     gql_url: process.env.SUPABASE_GQL_URL!,
-    s3_storage_url: process.env.SUPABASE_S3_STORAGE_URL!,
-    s3_studio_url: process.env.SUPABASE_S3_STUDIO_URL!,
-    s3_inbucket_url: process.env.SUPABASE_S3_INBUCKET_URL!,
+    storage_url: process.env.SUPABASE_STORAGE_URL!,
+    studio_url: process.env.SUPABASE_STUDIO_URL!,
+    inbucket_url: process.env.SUPABASE_INBUCKET_URL!,
     jwt_secret: process.env.SUPABASE_JWT_SECRET!,
     anon_key: process.env.SUPABASE_ANON_KEY!,
     service_role_key: process.env.SUPABASE_SERVICE_ROLE_KEY!,
