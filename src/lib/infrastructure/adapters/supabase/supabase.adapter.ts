@@ -71,7 +71,7 @@ export class SupabaseAdapter {
     const userSession = await AuthAdapter.GetUserSession(client);
 
     if (
-      !userSession.data &&
+      !userSession.data.user &&
       !request.nextUrl.pathname.startsWith("/login") &&
       !request.nextUrl.pathname.startsWith("/auth")
     ) {
