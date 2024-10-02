@@ -1,0 +1,17 @@
+import { z } from "zod";
+export const SignupFormSchema = z
+  .object({
+    email: z.string().email({
+      message: "Email address is required",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    confirmPassword: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match.",
+  });

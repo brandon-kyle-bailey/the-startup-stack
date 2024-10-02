@@ -18,7 +18,10 @@ class SignoutActionController {
   ) {}
   async execute() {
     this.logManager.debug("SignoutActionController.execute invoked");
-    await this.event.execute();
+    const result = await this.event.execute();
+    if (result.error) {
+      return result.error.name;
+    }
     revalidatePath("/", "layout");
     redirect("/");
   }

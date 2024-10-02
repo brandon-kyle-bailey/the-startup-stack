@@ -17,23 +17,22 @@ class SignupActionController {
     private readonly logManager: ILogManager,
     private readonly event: SignupCommand,
   ) {}
-  async execute(formdata: FormData) {
-    const input: SignupRequestDto = {
-      email: formdata.get("email") as string,
-      password: formdata.get("password") as string,
-    };
+  async execute(input: SignupRequestDto) {
     this.logManager.debug("SignupActionController.execute invoked:", input);
-    await this.event.execute(input);
+    const result = await this.event.execute(input);
+    if (result.error) {
+      return result.error.name;
+    }
     revalidatePath("/dashboard", "layout");
     redirect("/dashboard");
   }
 }
 
-export default async function SignupAction(formdata: FormData) {
+export default async function SignupAction(input: SignupRequestDto) {
   const logManager = new LogManager({ debug: container.debug });
   const adapter = new AuthAdapter(logManager);
   const applicationService = new SignupApplicationService(logManager, adapter);
   const command = new SignupCommand(logManager, applicationService);
   const controller = new SignupActionController(logManager, command);
-  return await controller.execute(formdata);
+  return await controller.execute(input);
 }

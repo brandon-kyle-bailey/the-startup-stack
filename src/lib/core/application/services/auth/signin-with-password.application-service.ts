@@ -1,4 +1,3 @@
-import { InternalServerErrorException } from "@/lib/common/exceptions/exceptions";
 import { ILogManager } from "@/lib/common/port/log/log-manager.port";
 import { AuthAdapter } from "@/lib/infrastructure/adapters/auth/auth.adapter";
 import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
@@ -19,7 +18,6 @@ export class SigninWithPasswordApplicationService {
         "SigninWithPasswordApplicationService.execute encountered an error:",
         result.error.message,
       );
-      throw new InternalServerErrorException(result.error.message);
     }
     return result;
   }

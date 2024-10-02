@@ -17,24 +17,26 @@ class SigninWithPasswordActionController {
     private readonly logManager: ILogManager,
     private readonly event: SigninWithPasswordCommand,
   ) {}
-  async execute(formdata: FormData) {
-    const input: SigninRequestDto = {
-      email: formdata.get("email") as string,
-      password: formdata.get("password") as string,
-    };
+  async execute(input: SigninRequestDto) {
     this.logManager.debug(
       "SigninWithPasswordActionController.execute invoked:",
       input,
     );
 
-    await this.event.execute(input);
+    const result = await this.event.execute(input);
+    this.logManager.debug("hey this is the result object", result);
+    if (result.error) {
+      return result.error.name;
+    }
 
     revalidatePath("/dashboard", "layout");
     redirect("/dashboard");
   }
 }
 
-export default async function SigninWithPasswordAction(formdata: FormData) {
+export default async function SigninWithPasswordAction(
+  input: SigninRequestDto,
+) {
   const logManager = new LogManager({ debug: container.debug });
   const adapter = new AuthAdapter(logManager);
   const applicationService = new SigninWithPasswordApplicationService(
@@ -46,5 +48,5 @@ export default async function SigninWithPasswordAction(formdata: FormData) {
     logManager,
     command,
   );
-  return await controller.execute(formdata);
+  return await controller.execute(input);
 }

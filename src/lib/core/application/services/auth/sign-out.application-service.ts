@@ -1,4 +1,3 @@
-import { InternalServerErrorException } from "@/lib/common/exceptions/exceptions";
 import { ILogManager } from "@/lib/common/port/log/log-manager.port";
 import { AuthAdapter } from "@/lib/infrastructure/adapters/auth/auth.adapter";
 
@@ -15,7 +14,6 @@ export class SignoutApplicationService {
         "SignoutApplicationService.execute encountered an error:",
         result.error.message,
       );
-      throw new InternalServerErrorException(result.error.message);
     }
     return result;
   }
