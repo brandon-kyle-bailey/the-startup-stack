@@ -9,9 +9,18 @@ export class AuthAdapter {
   constructor(private readonly logManager: ILogManager) {}
 
   async signinWithPassword(input: SigninRequestDto) {
-    this.logManager.debug("auth adapter signin with password executed:", input);
-    const client = SupabaseAdapter.ServerClient();
-    return await client.auth.signInWithPassword(input);
+    this.logManager.debug("AuthAdapter.signinWithPassword invoked:", input);
+    return await AuthAdapter.SigninWithPassword(input);
+  }
+
+  async signup(input: SignupRequestDto) {
+    this.logManager.debug("AuthAdapter.signup invoked:", input);
+    return await AuthAdapter.Signup(input);
+  }
+
+  async signout() {
+    this.logManager.debug("AuthAdapter.signout invoked");
+    return await AuthAdapter.Signout();
   }
 
   static async Signup(input: SignupRequestDto) {
