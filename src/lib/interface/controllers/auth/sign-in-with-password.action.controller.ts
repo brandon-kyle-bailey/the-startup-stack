@@ -4,10 +4,10 @@ import {
   ILogManager,
   LogManager,
 } from "@/lib/common/port/log/log-manager.port";
-import { SigninWithPasswordApplicationService } from "@/lib/core/application/services/auth/signin-with-password.application-service";
+import { SigninWithPasswordApplicationService } from "@/lib/core/application/services/auth/sign-in-with-password.application-service";
 import { AuthAdapter } from "@/lib/infrastructure/adapters/auth/auth.adapter";
 import { container } from "@/lib/infrastructure/adapters/environment/environment.adapter";
-import { SigninWithPasswordCommand } from "@/lib/interface/commands/auth/signin-with-password.command";
+import { SigninWithPasswordCommand } from "@/lib/interface/commands/auth/sign-in-with-password.command";
 import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -24,7 +24,6 @@ class SigninWithPasswordActionController {
     );
 
     const result = await this.event.execute(input);
-    this.logManager.debug("hey this is the result object", result);
     if (result.error) {
       return result.error.name;
     }

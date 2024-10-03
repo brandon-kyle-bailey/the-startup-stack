@@ -16,7 +16,7 @@ import {
   SigninFormSchemaDefaults,
 } from "@/lib/common/interface/forms/sign-in-form.schema";
 import { useFormSchema } from "@/lib/common/utils/create-form-instance.util";
-import SigninWithPasswordAction from "@/lib/interface/controllers/auth/signin-with-password.action.controller";
+import SigninWithPasswordAction from "@/lib/interface/controllers/auth/sign-in-with-password.action.controller";
 import { z } from "zod";
 
 export default function Page() {

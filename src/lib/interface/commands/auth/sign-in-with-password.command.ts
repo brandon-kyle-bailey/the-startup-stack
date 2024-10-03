@@ -1,5 +1,5 @@
 import { ILogManager } from "@/lib/common/port/log/log-manager.port";
-import { SigninWithPasswordApplicationService } from "@/lib/core/application/services/auth/signin-with-password.application-service";
+import { SigninWithPasswordApplicationService } from "@/lib/core/application/services/auth/sign-in-with-password.application-service";
 import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
 
 export class SigninWithPasswordCommand {

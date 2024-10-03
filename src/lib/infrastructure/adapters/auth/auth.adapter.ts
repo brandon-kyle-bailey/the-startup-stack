@@ -1,7 +1,10 @@
 import { ILogManager } from "@/lib/common/port/log/log-manager.port";
 import { container } from "@/lib/infrastructure/adapters/environment/environment.adapter";
 import { SupabaseAdapter } from "@/lib/infrastructure/adapters/supabase/supabase.adapter";
-import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
+import {
+  SigninRequestDto,
+  SigninWithOtpRequestDto,
+} from "@/lib/interface/dtos/auth/signin.request.dto";
 import { SignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
 import { SupabaseClient } from "@supabase/supabase-js";
 
@@ -11,6 +14,11 @@ export class AuthAdapter {
   async signinWithPassword(input: SigninRequestDto) {
     this.logManager.debug("AuthAdapter.signinWithPassword invoked:", input);
     return await AuthAdapter.SigninWithPassword(input);
+  }
+
+  async signinWithOtp(input: SigninWithOtpRequestDto) {
+    this.logManager.debug("AuthAdapter.signinWithOtp invoked:", input);
+    return await AuthAdapter.SigninWithOtp(input);
   }
 
   async signup(input: SignupRequestDto) {
@@ -46,6 +54,16 @@ export class AuthAdapter {
   static async SigninWithPassword(input: SigninRequestDto) {
     const client = SupabaseAdapter.ServerClient();
     return await client.auth.signInWithPassword(input);
+  }
+
+  static async SigninWithOtp(input: SigninWithOtpRequestDto) {
+    const client = SupabaseAdapter.ServerClient();
+    return await client.auth.signInWithOtp({
+      ...input,
+      options: {
+        emailRedirectTo: container.auth.emailRedirectTo,
+      },
+    });
   }
 
   static async Signout() {
