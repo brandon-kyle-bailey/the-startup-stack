@@ -19,6 +19,15 @@ class SignupActionController {
   ) {}
   async execute(input: SignupRequestDto) {
     this.logManager.debug("SignupActionController.execute invoked:", input);
+    // TODO: handle user creation in db:
+    // - check if user already exists
+    // - hash password
+    // - if invite id present:
+    //  - check if invite has expired
+    //  - handle invite status update
+    //  - handle team membership creation
+    // - if no invite
+    // - create team and team membership
     const result = await this.event.execute(input);
     if (result.error) {
       return result.error.name;

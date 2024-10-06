@@ -6,12 +6,18 @@ import { databaseAdapter } from "@/lib/infrastructure/adapters/database/database
 export type IUsersPort = BasePort<any>;
 
 export class UsersPort extends BasePort<any> implements IUsersPort {
+  private _model: typeof databaseAdapter.users;
   constructor(
     private readonly adapter: typeof databaseAdapter,
     private readonly modelMapper: IMapper<any, any, any>,
     protected readonly logManager: ILogManager,
   ) {
-    const model = adapter.users;
-    super(model, modelMapper, logManager);
+    super(adapter.users, modelMapper, logManager);
+    this._model = this.adapter.users;
+  }
+
+  async getByEmail(email: string): Promise<any> {
+    const record = await this._model.findUnique({ where: { email } });
+    return this.modelMapper.toDomain(record);
   }
 }
