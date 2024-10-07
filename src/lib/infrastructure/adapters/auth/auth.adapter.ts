@@ -5,7 +5,7 @@ import {
   SigninRequestDto,
   SigninWithOtpRequestDto,
 } from "@/lib/interface/dtos/auth/signin.request.dto";
-import { SignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
+import { AuthSignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export class AuthAdapter {
@@ -21,7 +21,7 @@ export class AuthAdapter {
     return await AuthAdapter.SigninWithOtp(input);
   }
 
-  async signup(input: SignupRequestDto) {
+  async signup(input: AuthSignupRequestDto) {
     this.logManager.debug("AuthAdapter.signup invoked:", input);
     return await AuthAdapter.Signup(input);
   }
@@ -31,7 +31,7 @@ export class AuthAdapter {
     return await AuthAdapter.Signout();
   }
 
-  static async Signup(input: SignupRequestDto) {
+  static async Signup(input: AuthSignupRequestDto) {
     const client = SupabaseAdapter.ServerClient();
     return await client.auth.signUp({
       ...input,

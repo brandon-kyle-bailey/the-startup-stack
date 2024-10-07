@@ -8,7 +8,9 @@ export interface PasswordValueObjectProps {
 export class PasswordValueObject extends ValueObject<PasswordValueObjectProps> {
   static create(props: PasswordValueObjectProps): PasswordValueObject {
     const hashedPassword = hashSync(props.password, 10);
-    const entity = new PasswordValueObject({ password: hashedPassword });
+    const entity = new PasswordValueObject({
+      password: hashedPassword,
+    });
     return entity;
   }
   public validate() {}

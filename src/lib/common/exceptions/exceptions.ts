@@ -78,6 +78,22 @@ export class NotFoundException extends ExceptionBase {
 }
 
 /**
+ * Used to indicate that entity is not found
+ *
+ * @class NotFoundException
+ * @extends {ExceptionBase}
+ */
+export class AlreadyExistsException extends ExceptionBase {
+  static readonly message = "Already exists";
+
+  constructor(message = AlreadyExistsException.message) {
+    super(message);
+  }
+
+  readonly code = CONFLICT;
+}
+
+/**
  * Used to indicate an internal server error that does not fall under all other errors
  *
  * @class InternalServerErrorException

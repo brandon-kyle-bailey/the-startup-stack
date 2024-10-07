@@ -8,7 +8,7 @@ import {
 } from "@/lib/common/utils/paginate.util";
 
 export interface IBasePort<T> {
-  getById(id: string): Promise<T>;
+  getById(id: string): Promise<T | null>;
   create(entity: T): Promise<T>;
   update(id: string, entity: T): Promise<T>;
   list(first?: number, after?: number): Promise<PaginatedResponse<T>>;
@@ -21,10 +21,10 @@ export abstract class BasePort<T extends Entity<any>> implements IBasePort<T> {
     private mapper: IMapper<any, T, any>,
     protected readonly logManager: ILogManager,
   ) {}
-  async getById(id: string): Promise<T> {
-    const record = await this.repo.findUnique({ where: { id } });
+  async getById(id: string): Promise<T | null> {
+    const record = await this.repo.findFirst({ where: { id } });
     if (!record) {
-      throw new NotFoundException(`Cannot find by id: ${id}`);
+      return null;
     }
     return this.mapper.toDomain(record);
   }

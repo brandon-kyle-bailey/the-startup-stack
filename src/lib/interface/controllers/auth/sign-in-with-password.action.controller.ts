@@ -16,6 +16,7 @@ import { container } from "@/lib/infrastructure/adapters/environment/environment
 import { UsersMapper } from "@/lib/infrastructure/mappers/users.mapper";
 import { SigninWithPasswordCommand } from "@/lib/interface/commands/auth/sign-in-with-password.command";
 import { SigninRequestDto } from "@/lib/interface/dtos/auth/signin.request.dto";
+import { compareSync } from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -31,22 +32,19 @@ class SigninWithPasswordActionController {
       input,
     );
 
-    // TODO: perform some validation here:
-    // - check user exists
-    // - check password hashes match
-
     const user = await this.userPort.getByEmail(input.email);
     if (!user) {
       return NotFoundException.message;
     }
 
-    if (!user.password.compare(input.password)) {
+    if (!compareSync(input.password, user.password_hash())) {
       return InternalServerErrorException.message;
     }
 
     const result = await this.event.execute(input);
     if (result.error) {
-      return result.error.name;
+      this.logManager.error(result.error.message);
+      return InternalServerErrorException.message;
     }
 
     revalidatePath("/dashboard", "layout");

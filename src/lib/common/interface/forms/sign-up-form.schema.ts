@@ -1,6 +1,10 @@
+import { SignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
 import { z } from "zod";
 export const SignupFormSchema = z
   .object({
+    name: z.string({
+      message: "Name is required",
+    }),
     email: z.string().email({
       message: "Email address is required",
     }),
@@ -15,3 +19,10 @@ export const SignupFormSchema = z
     path: ["confirmPassword"],
     message: "Passwords do not match.",
   });
+
+export const SignupFormSchemaDefaults: SignupRequestDto = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
