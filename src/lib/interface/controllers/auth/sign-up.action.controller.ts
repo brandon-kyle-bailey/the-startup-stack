@@ -18,10 +18,12 @@ import { container } from "@/lib/infrastructure/adapters/environment/environment
 import { SignupCommand } from "@/lib/interface/commands/auth/sign-up.command";
 import GetInvitationAction from "@/lib/interface/controllers/invitation/get-invitation.action.controller";
 import UpdateInvitationAction from "@/lib/interface/controllers/invitation/update-invitation.action.controller";
+import CreateTeamMemberAction from "@/lib/interface/controllers/team-member/create-team-member.action.controller";
 import GetTeamAction from "@/lib/interface/controllers/team/get-team.action.controller";
 import CreateUserAction from "@/lib/interface/controllers/user/create-user.action.controller";
 import GetUserAction from "@/lib/interface/controllers/user/get-user.action.controller";
 import { SignupRequestDto } from "@/lib/interface/dtos/auth/signup.request.dto";
+import { CreateTeamMemberRequestDto } from "@/lib/interface/dtos/team-member/create-team-member.request.dto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -38,15 +40,6 @@ class SignupActionController {
   ) {}
   async execute(input: SignupRequestDto) {
     this.logManager.debug("SignupActionController.execute invoked:", input);
-    // TODO: handle user creation in db:
-    // x check if user already exists
-    // x hash password
-    // x if invite id present:
-    //  x check if invite has expired
-    //  - handle invite status update
-    //  - handle team membership creation
-    // - if no invite
-    // - create team and team membership
 
     const passwordValueObject = PasswordValueObject.create({
       password: input.password,
@@ -62,7 +55,12 @@ class SignupActionController {
     }
 
     let role: UserRoleEnum = UserRoleEnum.OWNER;
-    let teamId: string;
+    let createTeamMemberProps: CreateTeamMemberRequestDto = {
+      team_id: "",
+      role: "" as UserRoleEnum,
+      joined_at: new Date(),
+      user_id: "",
+    };
     if (input.invitationId) {
       const invitation = await this.getInvitationAction({
         id: input.invitationId,
@@ -70,21 +68,32 @@ class SignupActionController {
       if (!invitation) {
         return NotFoundException.message;
       }
+
+      const team = await this.getTeamAction({ id: invitation.team_id });
+      if (!team) {
+        return NotFoundException.message;
+      }
       role = invitation.role;
-      teamId = invitation.team_id;
+      createTeamMemberProps = {
+        team_id: team.id,
+        role,
+        joined_at: new Date(),
+        user_id: "",
+      };
       await this.updateInvitationAction({
         id: invitation.id,
         status: InvitationStatusEnum.ACCEPTED,
       });
-
-      await this.createTeamMemberAction({ teamId });
     }
-
-    await this.createUserAction({
+    const newUser = await this.createUserAction({
       name: input.name,
       email: input.email,
       password_hash: passwordValueObject.password(),
       role,
+    });
+    await this.createTeamMemberAction({
+      ...createTeamMemberProps,
+      user_id: newUser.id,
     });
     const result = await this.event.execute({
       email: input.email,

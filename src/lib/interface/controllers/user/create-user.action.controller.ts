@@ -10,23 +10,32 @@ import { container } from "@/lib/infrastructure/adapters/environment/environment
 import { UsersMapper } from "@/lib/infrastructure/mappers/users.mapper";
 import { CreateUserCommand } from "@/lib/interface/commands/user/create-user.command";
 import { CreateUserRequestDto } from "@/lib/interface/dtos/users/create-user.request.dto";
+import { UserDto } from "@/lib/interface/dtos/users/user.dto";
 
 class CreateUserActionController {
   constructor(
     private readonly logManager: ILogManager,
     private readonly event: CreateUserCommand,
+    private readonly mapper: UsersMapper,
   ) {}
-  async execute(input: CreateUserRequestDto) {
+  async execute(input: CreateUserRequestDto): Promise<UserDto> {
     this.logManager.debug("CreateUserActionController.execute invoked:", input);
-    return await this.event.execute(input);
+    const user = await this.event.execute(input);
+    return this.mapper.toResponse(user);
   }
 }
 
-export default async function CreateUserAction(input: CreateUserRequestDto) {
+export default async function CreateUserAction(
+  input: CreateUserRequestDto,
+): Promise<UserDto> {
   const logManager = new LogManager({ debug: container.debug });
   const port = new UsersPort(databaseAdapter, new UsersMapper(), logManager);
   const applicationService = new CreateUserApplicationService(logManager, port);
   const command = new CreateUserCommand(logManager, applicationService);
-  const controller = new CreateUserActionController(logManager, command);
+  const controller = new CreateUserActionController(
+    logManager,
+    command,
+    new UsersMapper(),
+  );
   return await controller.execute(input);
 }
